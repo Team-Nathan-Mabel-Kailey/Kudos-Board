@@ -1,8 +1,10 @@
-// import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import axios from 'axios'
 import './App.css'
-import './Components/Footer/Footer.jsx'
-import Footer from './Components/Footer/Footer.jsx'
-import Header from './Components/Header/Header.jsx' 
+import Header from '../Header/Header.jsx' 
+import NavBar from '../NavBar/NavBar.jsx'
+import Footer from '../Footer/Footer.jsx'
 
 function App() {
 
