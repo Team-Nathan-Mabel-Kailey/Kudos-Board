@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 const createCard = async (cardData) => {
     return await prisma.card.create({
     data: {
-        board: { connect: { board_id: cardData.boardId } },
+        board: { connect: { board_id: cardData.board_id } },
         message: cardData.message,
         gifUrl: cardData.gifUrl,
         author: cardData.author,
@@ -43,16 +43,17 @@ const deleteCard = async (id) => {
 
 const upvoteCard = async (id) => {
     return prisma.card.update({
-    where: {
-        card_id: parseInt(id),
-    },
-    data: {
-        upvotes: {
-        increment: 1,
+        where: {
+            card_id: parseInt(id),
         },
-    },
+        data: {
+            upvotes: {
+                increment: 1,
+            },
+        },
     });
 };
+
 
 const getCardsInBoard = async (boardId) => {
     return prisma.card.findMany({
