@@ -1,5 +1,5 @@
 import Card from "../Card/Card"
-import "./boardList.css"
+import "./BoardList.css"
 
 function BoardList({ boards = [] }) {
 
