@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 // import axios from "axios";
 
 import './App.css'
 import Footer from '../Footer/Footer.jsx'
 import Header from '../Header/Header.jsx' 
+import Home from "../Home/Home.jsx";
 import NavBar from '../NavBar/NavBar.jsx'
-import Card from '../Card/Card.jsx'
+
 import CardDetail from '../CardDetail/CardDetail.jsx'
 
 function App() {
@@ -30,18 +31,10 @@ function App() {
             handleOnSearchInputChange={handleOnSearchInputChange}
       />
         
-        
-      {/* <Card 
-        // key={cardNum.id}
-        // cardNum={cardNum}
-        // viewBoard={() => viewBoard(cardNum.id)}
-        // deteleBoard={() => deleteBoard(cardNum.id)}
-      /> */}
-
 
       <Routes>
-        <Route path="/" element={<Card />} />
-        <Route path="/card-details/:id" element={<CardDetail />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/card-details/:cardId" element={<CardDetail />} />
       </Routes>
     
 
