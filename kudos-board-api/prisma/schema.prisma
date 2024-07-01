@@ -28,7 +28,7 @@ model Card {
   gifUrl    String
   author    String
   upvotes   Int      @default(0)
-  boardId   Int
-  board     Board    @relation(fields: [boardId], references: [board_id], onDelete: Cascade)
+  board_id  Int
+  board     Board    @relation(fields: [board_id], references: [board_id], onDelete: Cascade)
   createdAt DateTime @default(now())
 }

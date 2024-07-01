@@ -40,12 +40,14 @@ const deleteBoard = async (id) => {
 };
 
 const addCardToBoard = async (boardId, boardData) => {
-    return prisma.board.create({
+    console.log('boardData:', boardData);
+    let card = prisma.card.create({
         data: {
             board_id: parseInt(boardId),
             ...boardData,
         }
-    });
+    }); 
+    return card;
 };
 
 module.exports = {
