@@ -1,4 +1,4 @@
-import BoardList from "../BoardList/BoardList.jsx"
+import BoardList from "../BoardList/boardList"
 import "./Home.css"
 
 function Home({isFetching, boards, searchInputValue, activeCategory }) {

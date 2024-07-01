@@ -7,20 +7,39 @@ import Footer from '../Footer/Footer.jsx'
 import Header from '../Header/Header.jsx' 
 import Home from "../Home/Home.jsx";
 import NavBar from '../NavBar/NavBar.jsx'
-
 import CardDetail from '../CardDetail/CardDetail.jsx'
 
 function App() {
 
+  const [boards, setBoards] = useState([]);
+  const [newBoard, setNewBoard] = useState(false);
+  const [isFetching, setIsFetching] = useState(false);
   const [activeCategory, setActiveCategory] = useState("All Categories");
   const [searchInputValue, setSearchInputValue] = useState("");
+  const [error, setError] = useState(null);
+
+  const baseUrl = "http://localhost:3000/";
+
+  useEffect(() => {
+    const fetchBoards = async () => {
+      setIsFetching(true);
+      try {
+        const response = await axios.get(baseUrl + "boards");   // Gets all boards
+        setBoards(response.data);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setIsFetching(false);
+      }
+    };
+    fetchBoards();
+  }, []);
 
   const handleOnSearchInputChange = (event) => {
     setSearchInputValue(event.target.value);
   };
-  
+
   return (
-    
     <Router>
       <Header />
 
@@ -31,17 +50,31 @@ function App() {
             handleOnSearchInputChange={handleOnSearchInputChange}
       />
         
-
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/card-details/:cardId" element={<CardDetail />} />
+          <Route
+            path="/"
+            element={
+              <Home
+                error={error}
+                boards={boards}
+                isFetching={isFetching}
+                activeCategory={activeCategory}
+                setActiveCategory={setActiveCategory}
+              />
+            }
+        />
+
+            <Route
+              path="/card-details/:cardId"
+              element={
+                <CardDetail
+                  error={error}
+              />
+            }
+        />
       </Routes>
-    
-
-    <Footer />
-
+      <Footer />
     </Router>
-
   )
 }
 
