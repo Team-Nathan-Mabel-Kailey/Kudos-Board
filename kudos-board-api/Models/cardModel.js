@@ -60,7 +60,7 @@ const getCardsInBoard = async (boardId) => {
         boardId: parseInt(boardId),
     },
     });
-}
+};
 
 module.exports = {
     createCard,
