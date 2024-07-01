@@ -4,11 +4,10 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 // import axios from "axios";
 
 import './App.css'
-import Footer from './Components/Footer/Footer.jsx'
-import Header from './Components/Header/Header.jsx' 
-import Card from './Components/Card/Card.jsx'
-import CardDetail from './Components/CardDetail/CardDetail.jsx'
-
+import Footer from '../Footer/Footer.jsx'
+import Header from '../Header/Header.jsx' 
+import Card from '../Card/Card.jsx'
+import CardDetail from '../CardDetail/CardDetail.jsx'
 
 function App() {
 
