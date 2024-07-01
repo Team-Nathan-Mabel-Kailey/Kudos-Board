@@ -1,27 +1,39 @@
-// import { useState } from 'react'
+import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// import axios from "axios";
+
 import './App.css'
-import './Components/Footer/Footer.jsx'
 import Footer from './Components/Footer/Footer.jsx'
 import Header from './Components/Header/Header.jsx' 
 import Card from './Components/Card/Card.jsx'
-import axios from "axios";
+import CardDetail from './Components/CardDetail/CardDetail.jsx'
+
 
 function App() {
 
   return (
-    <>
+    
+    <Router>
       <Header />
         
-      <Card 
+        
+      {/* <Card 
         // key={cardNum.id}
         // cardNum={cardNum}
         // viewBoard={() => viewBoard(cardNum.id)}
         // deteleBoard={() => deleteBoard(cardNum.id)}
-      />
+      /> */}
 
-      <Footer />
-    </>
+
+      <Routes>
+        <Route path="/" element={<Card />} />
+        <Route path="/card-details/:id" element={<CardDetail />} />
+      </Routes>
     
+
+    <Footer />
+
+    </Router>
   )
 }
 
