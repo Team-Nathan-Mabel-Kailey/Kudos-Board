@@ -1,0 +1,22 @@
+.footer-container {
+    display: flex;
+    position: absolute;
+    overflow: hidden;
+
+    width: 100%;
+    background-color: teal;
+
+    left: 0;
+    z-index: 100;
+    bottom: 0;
+}
+
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+    color: white;
+}
