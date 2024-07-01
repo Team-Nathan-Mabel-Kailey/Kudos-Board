@@ -14,7 +14,7 @@ datasource db {
 }
 
 model Board {
-  board_id        Int      @id @default(autoincrement())
+  board_id  Int      @id @default(autoincrement())
   title     String
   category  String
   author    String
