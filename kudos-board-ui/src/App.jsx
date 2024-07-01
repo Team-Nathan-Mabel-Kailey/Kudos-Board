@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 // import axios from "axios";
@@ -7,6 +8,7 @@ import Footer from './Components/Footer/Footer.jsx'
 import Header from './Components/Header/Header.jsx' 
 import Card from './Components/Card/Card.jsx'
 import CardDetail from './Components/CardDetail/CardDetail.jsx'
+
 
 
 function App() {
@@ -34,6 +36,7 @@ function App() {
     <Footer />
 
     </Router>
+
   )
 }
 
