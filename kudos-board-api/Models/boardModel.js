@@ -39,10 +39,20 @@ const deleteBoard = async (id) => {
     });
 };
 
+const addCardToBoard = async (boardId, boardData) => {
+    return prisma.board.create({
+        data: {
+            board_id: parseInt(boardId),
+            ...boardData,
+        }
+    });
+};
+
 module.exports = {
     createBoard,
     getAllBoards,
     getBoardById,
     updateBoard,
     deleteBoard,
+    addCardToBoard
 };
