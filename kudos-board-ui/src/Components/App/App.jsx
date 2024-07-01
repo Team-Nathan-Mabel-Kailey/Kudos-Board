@@ -10,7 +10,6 @@ import Card from './Components/Card/Card.jsx'
 import CardDetail from './Components/CardDetail/CardDetail.jsx'
 
 
-
 function App() {
 
   return (
