@@ -1,5 +1,6 @@
+import PropTypes from 'prop-types';
 import Card from "../Card/Card"
-import "./boardList.css"
+import "./BoardList.css"
 
 function BoardList({ boards = [] }) {
 
@@ -24,5 +25,9 @@ function BoardList({ boards = [] }) {
   )
 
 }
+
+BoardList.propTypes = {
+  boards: PropTypes.array
+};
 
 export default BoardList;
