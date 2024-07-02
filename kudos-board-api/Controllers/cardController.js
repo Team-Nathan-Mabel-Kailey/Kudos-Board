@@ -1,4 +1,4 @@
-const cardModel = require('../models/cardModel');
+const cardModel = require('../Models/cardModel');
 
 const createCard = async (req, res) => {
     const { message, gifUrl, author, boardId } = req.body;

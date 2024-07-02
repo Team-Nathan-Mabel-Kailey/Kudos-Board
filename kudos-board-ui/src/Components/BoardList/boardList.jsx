@@ -7,32 +7,34 @@ import Header from '../Header/Header.jsx'
 import Card from "../Card/Card.jsx"
 import Modal from "../Modal/Modal.jsx"
 
+// what is it: list of cards inside each board
 const boardList = () => {
   const { boardId } = useParams();
   const [cards, setCards] = useState([]);
   const [boardName, setBoardName] = useState("");
   const [addNew, setAddNew] = useState(false);
 
-  const baseUrl = "http://localhost:3000/";
+  // const baseUrl = "http://localhost:3000/";
 
   useEffect(() => {
     fetchCards();
-    fetchBoardInfo();
+    fetchBoardTitle();
   }, [boardId]);
 
   const fetchCards = async () => {
     try {
-      const response = await axios.get(baseUrl + "boards");
-      setCards(response.data.cards);
+      const response = await axios.get(`http://localhost:3000/boards/${boardId}/cards`);
+      console.log(response.data);
+      setCards(response.data);
     } catch (error) {
       console.error("Error fetching cards:", error);
     }
   };
 
-  const fetchBoardInfo = async () => {
+  const fetchBoardTitle = async () => {
     try {
       const response = await axios.get(`http://localhost:3000/boards/${boardId}`);
-      const title = response.data.board.title;
+      const title = response.data.title;
       setBoardName(title);
     } catch (error) {
       console.error("Error fetching board data:", error);
