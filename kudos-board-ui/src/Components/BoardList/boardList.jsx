@@ -7,7 +7,7 @@ import Header from '../Header/Header.jsx'
 import Card from "../Card/Card.jsx"
 import Modal from "../Modal/Modal.jsx"
 
-const BoardList = () => {
+const boardList = () => {
   const { boardId } = useParams();
   const [cards, setCards] = useState([]);
   const [boardName, setBoardName] = useState("");
@@ -87,4 +87,4 @@ const BoardList = () => {
   );
 };
 
-export default BoardList;
+export default boardList;
