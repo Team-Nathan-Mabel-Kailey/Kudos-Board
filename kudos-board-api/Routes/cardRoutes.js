@@ -6,7 +6,6 @@ const {
     updateCard,
     deleteCard,
     upvoteCard,
-    getCardsInBoardController,
 } = require('../Controllers/cardController');
 
 const router = express.Router();
