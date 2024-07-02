@@ -55,7 +55,6 @@ const upvoteCard = async (id) => {
     });
 };
 
-
 const getCardsInBoard = async (board_id) => {
     return prisma.card.findMany({
         where: {
