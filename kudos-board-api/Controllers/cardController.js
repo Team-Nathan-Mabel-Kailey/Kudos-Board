@@ -77,17 +77,6 @@ const upvoteCard = async (req, res) => {
     }
 };
 
-const getCardsInBoardController = async (req, res) => {
-    const { board_id } = req.params;
-    try {
-        const cards = await cardModel.getCardsInBoard(board_id);
-        res.json(cards);
-        console.log('cards:', cards);
-    } catch (error) {
-        res.status(400).json({ error: 'Failed to fetch cards for the board' });
-    }
-};
-
 module.exports = {
     createCard,
     getAllCards,
@@ -95,5 +84,4 @@ module.exports = {
     updateCard,
     deleteCard,
     upvoteCard,
-    getCardsInBoardController,
 };
