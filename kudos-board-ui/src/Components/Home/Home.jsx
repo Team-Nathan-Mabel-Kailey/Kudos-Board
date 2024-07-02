@@ -59,7 +59,7 @@ const Home = () => {
 
   return (
     <div className="home">
-     <Header />
+      <Header />
 
       <main className="search">
         <input
