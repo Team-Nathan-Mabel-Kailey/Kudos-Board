@@ -88,6 +88,5 @@ module.exports = {
     getBoardById,
     updateBoard,
     deleteBoard,
-    addCardToBoard,
     getCardsInBoard,
 };
