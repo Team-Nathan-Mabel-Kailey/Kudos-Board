@@ -54,11 +54,13 @@
 }
 
 .board-list {
+    flex: 1;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
-    margin: 20px;
+    gap: 20px;
+    padding: 20px 0;
+    margin-bottom: 30px;
 }
 
 header nav {
@@ -80,9 +82,15 @@ header nav a:hover {
     border-radius: 5px;
 }
 
+main {
+    flex: 1;
+    padding-bottom: 50px;
+}
+
 main.search {
-    margin: 80px auto 20px auto;
-    max-width: 600px;
+    margin: 0px auto 0px auto;
+    max-width: 1200px;
+    padding: 0px;
 }
 
 main.search input[type="text"] {
@@ -101,6 +109,8 @@ main.search input[type="text"]:focus {
 
 .category-buttons {
     margin: 20px 0;
+    display: flex;
+    justify-content: center;
 }
 
 .category-buttons .category-button {
@@ -119,5 +129,12 @@ main.search input[type="text"]:focus {
 }
 
 .button-container {
-    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.home {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
