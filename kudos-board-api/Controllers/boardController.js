@@ -27,17 +27,17 @@ const getAllBoards = async (req, res) => {
 };
 
 const getBoardById = async (req, res) => {
-    const boardId = res.params.board_id
+    //const boardId = res.params.board_id
     try {
-        const board = await boardModel.getBoardById(boardId);
+        const board = await boardModel.getBoardById(req.params.board_id);
         res.status(200).json(board);
     } catch (error) {
         console.error('Error while getting board:', error.message);
         res.status(400).json({ error: error.message });
     }
-    if (!board) {
+    /*if (!board) {
         res.status(404).json({ error: 'Board not found' });
-    }
+    }*/
 };
 
 const updateBoard = async (req, res) => {

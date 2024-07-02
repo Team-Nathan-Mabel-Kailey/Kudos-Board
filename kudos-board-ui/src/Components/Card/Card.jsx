@@ -2,14 +2,14 @@ import './Card.css'
 import { BrowserRouter as Route, Routes, Link, BrowserRouter } from "react-router-dom";
 
 
-const Card = (cardNum, viewBoard, deleteBoard) => {
+const Card = (board, cardNum, viewBoard, deleteBoard) => {
     return (
-        <BrowserRouter>
+        
             <div className="home-card">
                 <div className="card-content">
                     <img src={"https://picsum.photos/300/400"} alt={"title"}/>
-                    <h2 className="card-title">{cardNum.title}</h2>
-                    <h3 className="card-category">{cardNum.category}</h3>
+                    <h2 className="card-title">{board.title}</h2>
+                    <h3 className="card-category">{board.category}</h3>
 
                     <div className="card-buttons">
                         <Link to={`/card-details/${cardNum.id}`}><button className="view-button">View Board</button></Link>
@@ -18,7 +18,6 @@ const Card = (cardNum, viewBoard, deleteBoard) => {
                     </div>
                 </div>
             </div>
-        </BrowserRouter>
     )
 }
 
