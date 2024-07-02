@@ -2,16 +2,14 @@ const boardModel = require('../Models/boardModel');
 const cardModel = require('../Models/cardModel');
 
 const createBoard = async (req, res) => {
-    const { title, category, author, cards } = req.body
-    console.log('requested body:', req.body);
+    const { title, category, author, cards } = req.body;
     try {
         const newBoard = await boardModel.createBoard({ title, category, author });
-        console.log('new board:', newBoard);
-        const createdCards = await Promise.all(cards.map(item => cardModel.addCardToBoard(newBoard.board_id, item)));
-        console.log('created cards:', createdCards);
-        res.status(201).json({...newBoard, cards: createdCards});
+        console.log('newBoard:', newBoard);
+        const createdCards = await Promise.all(cards.map(item => boardModel.addCardToBoard( newBoard.board_id , item)));
+        res.status(201).json({ ...newBoard, cards: createdCards });
     } catch (error) {
-        console.error('Error while creating order:', error.message);
+        console.error('Error while creating board:', error.message);
         res.status(400).json({ error: error.message });
     }
 };
@@ -27,24 +25,39 @@ const getAllBoards = async (req, res) => {
 };
 
 const getBoardById = async (req, res) => {
+<<<<<<< HEAD
     //const boardId = res.params.board_id
     try {
         const board = await boardModel.getBoardById(req.params.board_id);
         res.status(200).json(board);
+=======
+    const { board_id } = req.params;
+    try {
+        const board = await boardModel.getBoardById(board_id);
+        if (board) {
+            const boardCards = await cardModel.getCardsInBoard(board_id);
+            res.status(200).json({...board, boardCards});
+        } else {
+            res.status(404).json({ error: 'Board not found' });
+        }
+>>>>>>> 6f2890b069884de8557e168c0d6555e9379c29ae
     } catch (error) {
         console.error('Error while getting board:', error.message);
         res.status(400).json({ error: error.message });
     }
+<<<<<<< HEAD
     /*if (!board) {
         res.status(404).json({ error: 'Board not found' });
     }*/
+=======
+>>>>>>> 6f2890b069884de8557e168c0d6555e9379c29ae
 };
 
 const updateBoard = async (req, res) => {
-    const boardId = req.params.board_id;
+    const { board_id } = req.params;
     const boardData = req.body;
     try {
-        const updatedBoard = await boardModel.updateBoard(boardId, boardData);
+        const updatedBoard = await boardModel.updateBoard(board_id, boardData);
         res.status(200).json(updatedBoard);
         if (updatedBoard) {
             res.status(200).json(updatedBoard);
@@ -75,12 +88,13 @@ const addCardToBoard = async (req, res) => {
     const { board_id } = req.params;
     const { message, gifUrl, author } = req.body;
     try {
-        const boardId = await boardModel.getBoardById(board_id);
-        if (!boardId) {
+        const board = await boardModel.getBoardById(board_id);
+        if (!board) {
             res.status(404).json({ error: 'Board not found' });
+            return;
         }
         const newCard = await cardModel.createCard({ 
-            boardId : parseInt(boardId), 
+            board_id: board.board_id, 
             message, 
             gifUrl, 
             author 
@@ -92,6 +106,17 @@ const addCardToBoard = async (req, res) => {
     }
 };
 
+const getCardsInBoard = async (req, res) => {
+    const { board_id } = req.params;
+    try {
+        const cards = await cardModel.getCardsInBoard(board_id);
+        res.status(200).json(cards);
+    } catch (error) {
+        console.error('Error while getting cards in board:', error.message);
+        res.status(400).json({ error: error.message });
+    }
+};
+
 module.exports = {
     createBoard,
     getAllBoards,
@@ -99,4 +124,5 @@ module.exports = {
     updateBoard,
     deleteBoard,
     addCardToBoard,
+    getCardsInBoard,
 };

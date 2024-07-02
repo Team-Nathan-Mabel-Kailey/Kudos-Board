@@ -111,4 +111,11 @@ const Home = () => {
   );
 };
 
+Home.propTypes = {
+  isFetching: PropTypes.bool.isRequired,
+  boards: PropTypes.array.isRequired,
+  searchInputValue: PropTypes.string.isRequired,
+  activeCategory: PropTypes.string.isRequired,
+};
+
 export default Home;

@@ -22,9 +22,9 @@ const getAllCards = async (req, res) => {
 };
 
 const getCardById = async (req, res) => {
-    const { id } = req.params;
+    const { card_id } = req.params;
     try {
-        const card = await cardModel.getCardById(id);
+        const card = await cardModel.getCardById(card_id);
         if (card) {
             res.status(200).json(card);
         } else {
@@ -37,10 +37,10 @@ const getCardById = async (req, res) => {
 };
 
 const updateCard = async (req, res) => {
-    const cardId = req.params.card_id;
+    const { card_id } = req.params;
     const cardData = req.body;
     try {
-        const updatedCard = await cardModel.updateCard(cardId, cardData);
+        const updatedCard = await cardModel.updateCard(card_id, cardData);
         if (updatedCard) {
             res.status(200).json(updatedCard);
         } else {
@@ -53,9 +53,9 @@ const updateCard = async (req, res) => {
 };
 
 const deleteCard = async (req, res) => {
-    const cardId = req.params.card_id;
+    const { card_id } = req.params;
     try {
-        const deletedCard = await cardModel.deleteCard(cardId);
+        const deletedCard = await cardModel.deleteCard(card_id);
         if (deletedCard) {
             res.status(200).json(deletedCard);
         } else {
@@ -68,22 +68,12 @@ const deleteCard = async (req, res) => {
 };
 
 const upvoteCard = async (req, res) => {
-    const { id } = req.params;
+    const { card_id } = req.params;
     try {
-        const card = await upvoteCard(id);
+        const card = await upvoteCard(card_id);
         res.json(card);
     } catch (error) {
         res.status(500).json({ error: 'Failed to upvote card' });
-    }
-};
-
-const getCardsInBoardController = async (req, res) => {
-    try {
-        const { boardId } = req.params;
-        const cards = await getCardsInBoard(boardId);
-        res.json(cards);
-    } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch cards for the board' });
     }
 };
 
@@ -94,5 +84,4 @@ module.exports = {
     updateCard,
     deleteCard,
     upvoteCard,
-    getCardsInBoardController,
 };
