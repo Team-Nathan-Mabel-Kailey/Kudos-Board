@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import axios from "axios";
 import { useState } from "react";
 
-const Modal = ({show, onClose, cardId}) => {
+const Modal = ({show, onClose, cardId, onSuccess}) => {
     const apiKey = import.meta.env.VITE_API_KEY;
 
     const[title, setTitle] = useState("");
@@ -40,14 +40,14 @@ const Modal = ({show, onClose, cardId}) => {
         setGifOptions([]);
     }
 
-    const handleCreateCard = () => {
+    const handleCreateCard = async () => {
         try {
             if(!title || !description || !gif) {
                 alert("Fill out all fields!");
                 return;
             }
 
-            const response = axios.post(`http://localhost:3000//card-details/${cardId}/cards`, {
+            const response = axios.post(`http://localhost:3000/card-details/${cardId}/cards`, {
                 title: title,
                 description: description,
                 gif: gif,
@@ -119,5 +119,7 @@ export default Modal
 
 Modal.propTypes = {
     show: PropTypes.bool.isRequired,
-    onClose: PropTypes.func.isRequired
+    onClose: PropTypes.func.isRequired,
+    cardId: PropTypes.string.isRequired,
+    onSuccess: PropTypes.func.isRequired
 };
