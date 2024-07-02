@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import axios from "axios";
 import { useState } from "react";
 
-const Modal = ({show, onClose, cardId, onSuccess}) => {
+const Modal = (show, onClose, onSuccess, cardId) => { 
     const apiKey = import.meta.env.VITE_API_KEY;
 
     const[title, setTitle] = useState("");
@@ -15,9 +15,9 @@ const Modal = ({show, onClose, cardId, onSuccess}) => {
     const [gif, setGif] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
 
-    if(!show) {
-        return null;
-    }
+    // if(!show) {
+    //     return null;
+    // }
 
     const getGifs = async () => {
         try {
@@ -54,9 +54,9 @@ const Modal = ({show, onClose, cardId, onSuccess}) => {
                 owner: 'owner',
             });
 
-            const newCard = response.data;
+            // const newCard = response.data;
 
-            onSuccess(newCard);
+            // onSuccess(newCard);
             setTitle("");
             setDescription("");
             setGif("");
@@ -112,14 +112,14 @@ const Modal = ({show, onClose, cardId, onSuccess}) => {
                 </div>
             </div>
         </div>
-    )
-}
+    ) 
+} 
 
 export default Modal
 
 Modal.propTypes = {
-    show: PropTypes.bool.isRequired,
+    // show: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
-    cardId: PropTypes.string.isRequired,
-    onSuccess: PropTypes.func.isRequired
+    // cardId: PropTypes.string.isRequired,
+    // onSuccess: PropTypes.func.isRequired
 };
