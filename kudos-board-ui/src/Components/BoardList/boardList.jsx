@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import './boardList.css'
@@ -82,7 +82,7 @@ const BoardList = () => {
                 <Card
                   card={card}
                   fetchCards={fetchCards}
-                  baseUrl={"http://localhost:3000"}
+                  baseUrl={"http://localhost:3000/"}
                 />
             </div>
         ))}
