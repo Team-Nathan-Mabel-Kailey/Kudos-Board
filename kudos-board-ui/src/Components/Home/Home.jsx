@@ -11,7 +11,7 @@ import Header from '../Header/Header.jsx'
 const Home = () => {
   const [boards, setBoards] = useState([]);
   const [addNew, setAddNew] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchInputValue, setSearchInputValue] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
 
   const categories = ["All", "Recent", "Celebration", "Thank You", "Inpiration"];
@@ -33,7 +33,7 @@ const Home = () => {
   };
 
   const displayBoards = () => {
-    return boards.map((board) => (
+    return boardsToShow.map((board) => (
       <div key={board.board_id} className="board-card card">
         <img
           src={`https://picsum.photos/200/300?random=${board.board_id}`}
@@ -76,6 +76,11 @@ const Home = () => {
     }
   };
 
+  const boardsToShow = Boolean(searchInputValue)
+    ? boardsByCategory.filter((p) => p.name.toLowerCase().indexOf(searchInputValue.toLowerCase()) !== -1)
+    : boardsByCategory
+
+  
   const boardsByCategory =
     Boolean(activeCategory) && activeCategory !== "All Categories"
       ? boards.filter((p) => p.category === activeCategory)
@@ -89,8 +94,8 @@ const Home = () => {
         <input
           type="text"
           placeholder="Search..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          value={searchInputValue}
+          onChange={(e) => setSearchInputValue(e.target.value)}
         />
       </main>
 
