@@ -6,6 +6,8 @@ import BoardModal from "../BoardModal/BoardModal"
 import Footer from '../Footer/Footer.jsx'
 import Header from '../Header/Header.jsx'
 
+
+// what is it: list of all boards
 const Home = () => {
   const [boards, setBoards] = useState([]);
   const [addNew, setAddNew] = useState(false);
@@ -21,7 +23,7 @@ const Home = () => {
     try {
       const response = await axios.get(baseUrl + "boards");
       setBoards(response.data);
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       console.error("Error displaying boards:", error);
     }
@@ -101,7 +103,7 @@ const Home = () => {
           Create a New Board
         </button>
         {addNew && (
-          <BoardModal onCreation={handleOnCreate} onClose={showModal} />
+          <BoardModal onClose={showModal} />
         )}
       </div>
       
@@ -109,13 +111,6 @@ const Home = () => {
       <Footer />
     </div>
   );
-};
-
-Home.propTypes = {
-  isFetching: PropTypes.bool.isRequired,
-  boards: PropTypes.array.isRequired,
-  searchInputValue: PropTypes.string.isRequired,
-  activeCategory: PropTypes.string.isRequired,
 };
 
 export default Home;

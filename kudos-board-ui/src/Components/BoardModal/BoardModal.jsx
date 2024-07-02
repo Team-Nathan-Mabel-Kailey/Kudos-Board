@@ -1,11 +1,7 @@
 import './BoardModal.css'
 import PropTypes from 'prop-types';
 
-const BoardModal = ({show, onClose}) => {
-    
-    if(!show) {
-        return null;
-    }
+const BoardModal = ({onClose}) => {
 
     return (
         <div>
@@ -41,6 +37,5 @@ const BoardModal = ({show, onClose}) => {
 export default BoardModal
 
 BoardModal.propTypes = {
-    show: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired
 };
