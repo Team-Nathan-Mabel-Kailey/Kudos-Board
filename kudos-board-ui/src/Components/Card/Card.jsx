@@ -1,5 +1,6 @@
 import React from "react";
 import "./Card.css";
+import "./BoardCard.css";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import axios from "axios";
@@ -28,15 +29,21 @@ const handleUpvote = async () => {
     };
 
     return (
-        <div className="card">
-        <h3>{title}</h3>
-        <p>{message}</p>
-        <img src={gifUrl} alt="GIF" />
-        <p>{author}</p>
-        <button className='upvote-button' onClick={handleUpvote}>Upvote: {upvotes}</button>
-        <button className="delete-button" onClick={() => deleteCard(card.card_id)}>
-            Delete
-        </button>
+        <div className="card home-card">
+            <div className="card-content">
+                <h3>{title}</h3>
+                <p>{message}</p>
+                <img src={gifUrl} alt="GIF" />
+                <p>{author}</p>
+
+                <div className="board-card-buttons">
+                    <button className='upvote-button' onClick={handleUpvote}>Upvote: {upvotes}</button>
+                    <button className="delete-button" onClick={() => deleteCard(card.card_id)}>Delete
+                    </button>
+                </div>
+                
+            </div>
+            
         </div>
     );
 };

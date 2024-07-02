@@ -101,6 +101,7 @@
 
 .gif-container img {
     height: 165px;
+    max-height: 165px;
     width: 165px;
     height: auto;
 }
