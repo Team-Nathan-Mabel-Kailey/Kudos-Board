@@ -68,11 +68,12 @@ const deleteCard = async (req, res) => {
 };
 
 const upvoteCard = async (req, res) => {
-    const { card_id } = req.params;
+    const { id } = req.params;
     try {
-        const card = await upvoteCard(card_id);
-        res.json(card);
+        const card = await cardModel.upvoteCard(id);
+        res.status(200).json(card);
     } catch (error) {
+        console.error('Error while upvoting card:', error.message);
         res.status(500).json({ error: 'Failed to upvote card' });
     }
 };
