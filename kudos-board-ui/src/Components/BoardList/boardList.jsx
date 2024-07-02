@@ -76,14 +76,12 @@ const boardList = () => {
 
       <div className="card-list">
         {cards.map((card) => (
-          <div className="card">
-            <Card
-              key={card.card_id}
-              card={card}
-            />
+          <div className="card" key={card.card_id}>
+            <Card card={card} />
           </div>
         ))}
       </div>
+
       <Footer />
     </div>
   );

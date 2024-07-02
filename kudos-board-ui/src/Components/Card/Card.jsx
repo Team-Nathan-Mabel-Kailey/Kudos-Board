@@ -1,13 +1,14 @@
+import React, { useState } from "react";
 import "./Card.css";
 import axios from "axios";
 
 const Card = ({ card }) => {
-  const { message, gifUrl, author } = card;
+  const { message, gifUrl, author, card_id } = card;
   const [upvotes, setUpvotes] = useState(card.upvotes);
 
   const handleUpvote = async () => {
     try {
-      await axios.put(`http://localhost3000/boards/${card.board_id}/cards/${card.card_id}/upvote`, { upvotes: upvotes + 1 });
+      await axios.put(`http://localhost3000/cards/${card_id}/upvote`, { upvotes: upvotes + 1 });
       setUpvotes(upvotes + 1);
     } catch (error) {
       console.error("Error upvoting card:", error);
