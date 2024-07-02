@@ -1,9 +1,9 @@
 const cardModel = require('../Models/cardModel');
 
 const createCard = async (req, res) => {
-    const { message, gifUrl, author, boardId } = req.body;
+    const { title, message, gifUrl, author, boardId } = req.body;
     try {
-        const newCard = await cardModel.createCard({ message, gifUrl, author, boardId });
+        const newCard = await cardModel.createCard({ title, message, gifUrl, author, boardId });
         res.status(201).json(newCard);
     } catch (error) {
         console.error('Error while creating card:', error.message);

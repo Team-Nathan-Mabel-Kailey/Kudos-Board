@@ -5,6 +5,7 @@ const createCard = async (cardData) => {
     return await prisma.card.create({
     data: {
         board: { connect: { board_id: cardData.board_id } },
+        title: cardData.title,
         message: cardData.message,
         gifUrl: cardData.gifUrl,
         author: cardData.author,

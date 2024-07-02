@@ -6,9 +6,10 @@ import Footer from '../Footer/Footer.jsx'
 import Header from '../Header/Header.jsx' 
 import Card from "../Card/Card.jsx"
 import Modal from "../Modal/Modal.jsx"
+import "../Card/Card.css";
 
 // what is it: list of cards inside each board
-const boardList = () => {
+const BoardList = () => {
   const { boardId } = useParams();
   const [cards, setCards] = useState([]);
   const [boardName, setBoardName] = useState("");
@@ -23,7 +24,7 @@ const boardList = () => {
 
   const fetchCards = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/boards/${boardId}/cards`);
+      const response = await axios.get(`http://localhost:3000/boards/${boardId}`);
       console.log(response.data);
       setCards(response.data);
     } catch (error) {
@@ -67,6 +68,7 @@ const boardList = () => {
             show={addNew}
             onCreation={handleOnCreate}
             onClose={showModal}
+            // onClose={() => setAddNew(null)}
           />
         )}
       </div>
@@ -76,6 +78,13 @@ const boardList = () => {
           <div className="card" key={card.card_id}>
             <Card card={card} />
           </div>
+            /*<div key={card.card_id} className="card">
+                <Card
+                  card={card}
+                  fetchCards={fetchCards}
+                  baseUrl={"http://localhost:3000"}
+                />
+            </div>*/
         ))}
       </div>
 
@@ -84,4 +93,4 @@ const boardList = () => {
   );
 };
 
-export default boardList;
+export default BoardList;

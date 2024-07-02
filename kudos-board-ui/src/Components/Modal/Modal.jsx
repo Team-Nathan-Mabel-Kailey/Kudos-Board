@@ -54,6 +54,10 @@ const Modal = ({ onClose, boardId, onCreation }) => {
 
             onCreation();
             // setTitle("");
+            // const newCard = response.data;
+
+            // onSuccess(newCard);
+            setTitle("");
             setDescription("");
             setGif("");
             setOwner("");
@@ -108,7 +112,14 @@ const Modal = ({ onClose, boardId, onCreation }) => {
                 </div>
             </div>
         </div>
-    )
-}
+    ) 
+} 
 
-export default Modal;
+export default Modal
+
+Modal.propTypes = {
+    // show: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+    // cardId: PropTypes.string.isRequired,
+    // onSuccess: PropTypes.func.isRequired
+};
