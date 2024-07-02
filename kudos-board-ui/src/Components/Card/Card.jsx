@@ -4,26 +4,26 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import axios from "axios";
 
-const Card = ({ card }) => {
-  const { message, gifUrl, author, card_id } = card;
-  const [upvotes, setUpvotes] = useState(card.upvotes);
+const Card = ({ card, fetchCards, baseUrl}) => {
+const { message, gifUrl, author, card_id } = card;
+const [upvotes, setUpvotes] = useState(card.upvotes);
 
-  const handleUpvote = async () => {
+const handleUpvote = async () => {
     try {
-      await axios.put(`http://localhost:3000/cards/${card_id}/upvote`, { upvotes: upvotes + 1 });
-      setUpvotes(upvotes + 1);
+        await axios.put(`http://localhost:3000/cards/${card_id}/upvote`, { upvotes: upvotes + 1 });
+        setUpvotes(upvotes + 1);
     } catch (error) {
-      console.error("Error upvoting card:", error);
+        console.error("Error upvoting card:", error);
     }
-  };
+};
 
     const deleteCard = async (cardId) => {
         try{
-            console.log("deleting board", cardId);
-            await axios.delete(baseUrl + `boards/${cardId}`);
-            fetchBoards();
+            console.log("deleting card", cardId);
+            await axios.delete(baseUrl + `cards/${cardId}`);
+            fetchCards();
         } catch (error){
-        console.error("Error deleting board:", error);
+        console.error("Error deleting card:", error);
         }
     };
 
@@ -42,8 +42,8 @@ const Card = ({ card }) => {
 
 export default Card;
 
-/*Card.propTypes = {
+Card.propTypes = {
     card: PropTypes.object.isRequired,
-    fetchBoards: PropTypes.func.isRequired,
+    fetchCards: PropTypes.func.isRequired,
     baseUrl: PropTypes.string.isRequired
-}; */
+}; 
