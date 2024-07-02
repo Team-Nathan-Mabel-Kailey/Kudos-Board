@@ -117,9 +117,9 @@ const Modal = ({ onClose, boardId, onCreation }) => {
 
 export default Modal
 
-Modal.propTypes = {
+/* Modal.propTypes = {
     // show: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
     // cardId: PropTypes.string.isRequired,
     // onSuccess: PropTypes.func.isRequired
-};
+}; */

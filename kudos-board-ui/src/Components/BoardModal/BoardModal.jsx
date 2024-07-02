@@ -19,7 +19,8 @@ const BoardModal = ({ onClose, onCreation }) => {
             const response = await axios.post(`http://localhost:3000/boards`, {
                 title: title,
                 category: category,
-                author: author
+                author: author,
+                cards: []
             });
 
             onCreation();

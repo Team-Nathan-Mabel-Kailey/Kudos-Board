@@ -24,7 +24,7 @@ const BoardList = () => {
 
   const fetchCards = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/boards/${boardId}`);
+      const response = await axios.get(`http://localhost:3000/boards/${boardId}/cards`);
       console.log(response.data);
       setCards(response.data);
     } catch (error) {
@@ -75,16 +75,16 @@ const BoardList = () => {
 
       <div className="card-list">
         {cards.map((card) => (
-          <div className="card" key={card.card_id}>
+          /*<div className="card" key={card.card_id}>
             <Card card={card} />
-          </div>
-            /*<div key={card.card_id} className="card">
+          </div> */
+            <div key={card.card_id} className="card">
                 <Card
                   card={card}
                   fetchCards={fetchCards}
                   baseUrl={"http://localhost:3000"}
                 />
-            </div>*/
+            </div>
         ))}
       </div>
 

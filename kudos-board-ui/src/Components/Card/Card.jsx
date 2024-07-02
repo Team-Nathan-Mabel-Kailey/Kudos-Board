@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./Card.css";
 import PropTypes from "prop-types";
 import { useState } from "react";
@@ -42,8 +42,8 @@ const Card = ({ card }) => {
 
 export default Card;
 
-Card.propTypes = {
+/*Card.propTypes = {
     card: PropTypes.object.isRequired,
     fetchBoards: PropTypes.func.isRequired,
     baseUrl: PropTypes.string.isRequired
-};
+}; */
