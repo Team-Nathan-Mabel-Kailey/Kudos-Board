@@ -5,7 +5,7 @@ const {
     getBoardById,
     updateBoard,
     deleteBoard,
-    getCardsInBoard,
+    getCardsInBoard
 } = require('../Controllers/boardController');
 
 const router = express.Router();
