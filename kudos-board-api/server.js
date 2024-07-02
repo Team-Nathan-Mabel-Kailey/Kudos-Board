@@ -15,10 +15,6 @@ app.use(bodyParser.json());
 
 app.use('/boards', boardRoutes);
 app.use('/cards', cardRoutes);
-<<<<<<< HEAD
-// app.use('/comments', commentRoutes);
-=======
->>>>>>> 6f2890b069884de8557e168c0d6555e9379c29ae
 
 const PORT = 5173;
 
