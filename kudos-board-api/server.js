@@ -17,6 +17,7 @@ app.use('/boards', boardRoutes);
 app.use('/cards', cardRoutes);
 
 const PORT = 5173;
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
