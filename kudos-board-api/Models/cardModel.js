@@ -55,11 +55,11 @@ const upvoteCard = async (id) => {
 };
 
 
-const getCardsInBoard = async (boardId) => {
+const getCardsInBoard = async (board_id) => {
     return prisma.card.findMany({
-    where: {
-        boardId: parseInt(boardId),
-    },
+        where: {
+            board_id: parseInt(board_id),
+        },
     });
 };
 
@@ -70,5 +70,5 @@ module.exports = {
     updateCard,
     deleteCard,
     upvoteCard,
-    getCardsInBoard,
+    getCardsInBoard
 };

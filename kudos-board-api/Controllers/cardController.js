@@ -78,12 +78,13 @@ const upvoteCard = async (req, res) => {
 };
 
 const getCardsInBoardController = async (req, res) => {
+    const { board_id } = req.params;
     try {
-        const { board_id } = req.params;
-        const cards = await getCardsInBoard(board_id);
+        const cards = await cardModel.getCardsInBoard(board_id);
         res.json(cards);
+        console.log('cards:', cards);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch cards for the board' });
+        res.status(400).json({ error: 'Failed to fetch cards for the board' });
     }
 };
 

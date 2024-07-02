@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use('/boards', boardRoutes);
 app.use('/cards', cardRoutes);
 
-const PORT = 3000;
+const PORT = 5173;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

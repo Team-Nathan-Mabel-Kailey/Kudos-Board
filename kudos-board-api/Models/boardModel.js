@@ -50,11 +50,20 @@ const addCardToBoard = async (boardId, boardData) => {
     return card;
 };
 
+const getCardsInBoard = async (board_id) => {
+    return prisma.board.findMany({
+        where: {
+            board_id: parseInt(board_id),
+        },
+    })
+};
+
 module.exports = {
     createBoard,
     getAllBoards,
     getBoardById,
     updateBoard,
     deleteBoard,
-    addCardToBoard
+    addCardToBoard,
+    getCardsInBoard,
 };
