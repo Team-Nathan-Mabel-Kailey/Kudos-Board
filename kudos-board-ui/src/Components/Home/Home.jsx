@@ -12,6 +12,9 @@ const Home = () => {
   const [boards, setBoards] = useState([]);
   const [addNew, setAddNew] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState("All");
+
+  const categories = ["All", "Recent", "Celebration", "Thank You", "Inpiration"];
 
   const baseUrl = "http://localhost:3000/";
 
@@ -73,6 +76,11 @@ const Home = () => {
     }
   };
 
+  const boardsByCategory =
+    Boolean(activeCategory) && activeCategory !== "All Categories"
+      ? boards.filter((p) => p.category === activeCategory)
+      : boards
+
   return (
     <div className="home">
       <Header />
@@ -86,8 +94,8 @@ const Home = () => {
         />
       </main>
 
-      <div className="category-buttons">
-        <button
+      <div className="category-buttons ">
+        {/* <button
           className="button-common category-button"
         >
           All
@@ -111,7 +119,15 @@ const Home = () => {
           className="button-common category-button"
         >
           Inspiration
-        </button>
+        </button> */}
+
+        {/* <ul className={`category-menu category-buttons`}> */}
+            {categories.map((cat) => (
+              <li className={activeCategory === cat ? "is-active" : ""} key={cat}>
+                <button className="button-common category-button" onClick={() => setActiveCategory(cat)}>{cat}</button>
+              </li>
+            ))}
+          {/* </ul> */}
       </div>
 
       <div className="button-container">
