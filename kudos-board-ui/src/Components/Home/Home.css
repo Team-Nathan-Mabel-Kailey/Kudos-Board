@@ -113,6 +113,10 @@ main.search input[type="text"]:focus {
     justify-content: center;
 }
 
+.category-buttons li {
+    list-style: none;
+}
+
 .category-buttons .category-button {
     background-color: #333;
     color: #fff;
