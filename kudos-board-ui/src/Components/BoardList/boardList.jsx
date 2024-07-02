@@ -45,13 +45,9 @@ const boardList = () => {
     setAddNew(!addNew);
   };
 
-  const handleOnCreate = (newCard) => {
-    if (newCard && newCard.card_id) {
-      setCards([...cards, newCard]);
-      setAddNew(false);
-    } else {
-      console.error("Invalid info:", newCard);
-    }
+  const handleOnCreate = () => {
+    fetchCards();
+    setAddNew(false);
   };
 
   return (
@@ -68,8 +64,9 @@ const boardList = () => {
         {addNew && (
           <Modal
             boardId={boardId}
+            show={addNew}
             onCreation={handleOnCreate}
-            onClose={toggleForm}
+            onClose={showModal}
           />
         )}
       </div>

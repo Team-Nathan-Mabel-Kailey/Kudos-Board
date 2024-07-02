@@ -1,7 +1,37 @@
 import './BoardModal.css'
+import axios from "axios";
+import { useState } from "react";
 import PropTypes from 'prop-types';
 
-const BoardModal = ({onClose}) => {
+const BoardModal = ({ onClose, onCreation }) => {
+
+    const[title, setTitle] = useState("");
+    const[category, setCategory] = useState("");
+    const[author, setAuthor] = useState("");
+
+    const handleCreateBoard = async () => {
+        try {
+            /* if(!description || !gif) {
+                alert("Fill out all fields!");
+                return;
+            } */
+
+            const response = await axios.post(`http://localhost:3000/boards`, {
+                title: title,
+                category: category,
+                author: author
+            });
+
+            onCreation();
+            setTitle("");
+            setCategory("");
+            setAuthor("");
+
+            console.log(response);
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     return (
         <div>
@@ -15,16 +45,16 @@ const BoardModal = ({onClose}) => {
                         <h2>Create a board</h2>
 
                         <div className='modal-inputs'>
-                            <input type='text' placeholder='Enter Board Title' />
-                            <select>
+                            <input type='text' placeholder='Enter Board Title' value={title} onChange={(e) => setTitle(e.target.value)}/>
+                            <select value={category} onChange={(e) => setCategory(e.target.value)}>
                                 <option value="">Select category</option>
-                                <option value="a">Recent</option>
-                                <option value="b">Celebration</option>
-                                <option value="c">Thank You</option>
-                                <option value="c">Inspiration</option>
+                                <option value="Recent">Recent</option>
+                                <option value="Celebration">Celebration</option>
+                                <option value="Thank You">Thank You</option>
+                                <option value="Inspiration">Inspiration</option>
                             </select>
-                            <input type='text' placeholder='Enter Author Name' />
-                            <button className='modal-create-button'>Create Board</button>
+                            <input type='text' placeholder='Enter Author Name' value={author} onChange={(e) => setAuthor(e.target.value)}/>
+                            <button className='modal-create-button' onClick={handleCreateBoard}>Create Board</button>
                         </div>
 
                     </div>

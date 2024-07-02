@@ -52,7 +52,7 @@ const Home = () => {
     setAddNew(!addNew);
   };
 
-  const handleOnCreate = () => {
+  const handleOnCreateBoard = () => {
     fetchBoards();
     setAddNew(false);
   };
@@ -103,7 +103,9 @@ const Home = () => {
           Create a New Board
         </button>
         {addNew && (
-          <BoardModal onClose={showModal} />
+          <BoardModal show={addNew}
+          onCreation={handleOnCreateBoard}
+          onClose={showModal}/>
         )}
       </div>
       
