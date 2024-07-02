@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-import './BoardList.css'
+import './boardList.css'
 import Footer from '../Footer/Footer.jsx'
 import Header from '../Header/Header.jsx' 
 import Card from "../Card/Card.jsx"
