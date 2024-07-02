@@ -71,28 +71,6 @@ const deleteBoard = async (req, res) => {
     }
 };
 
-const addCardToBoard = async (req, res) => {
-    const { board_id } = req.params;
-    const { message, gifUrl, author } = req.body;
-    try {
-        const board = await boardModel.getBoardById(board_id);
-        if (!board) {
-            res.status(404).json({ error: 'Board not found' });
-            return;
-        }
-        const newCard = await cardModel.createCard({ 
-            board_id: board.board_id, 
-            message, 
-            gifUrl, 
-            author 
-        });
-        res.status(201).json(newCard);
-    } catch (error) {
-        console.error('Error while adding card to board:', error.message);
-        res.status(400).json({ error: error.message });
-    }
-};
-
 const getCardsInBoard = async (req, res) => {
     const { board_id } = req.params;
     try {
