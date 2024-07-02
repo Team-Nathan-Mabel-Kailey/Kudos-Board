@@ -39,11 +39,12 @@ const Modal = ({ onClose, boardId, onCreation }) => {
     const handleCreateCard = async () => {
         try {
             console.log(name);
-            const response = await axios.post(`http://localhost:3000/boards/${boardId}/cards`, {
+            const response = await axios.post(`http://localhost:3000/cards`, {
                 message: description,
                 gifUrl: gif,
                 author: owner,
-                title: name
+                title: name,
+                boardId: parseInt(boardId)
             });
 
             console.log(response);
