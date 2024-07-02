@@ -11,6 +11,7 @@ import Header from '../Header/Header.jsx'
 const Home = () => {
   const [boards, setBoards] = useState([]);
   const [addNew, setAddNew] = useState(false);
+  const [filteredBoards, setFilteredBoards] = useState([]);
   const [searchInputValue, setSearchInputValue] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
 
@@ -26,13 +27,12 @@ const Home = () => {
     try {
       const response = await axios.get(baseUrl + "boards");
       setBoards(response.data);
+      setFilteredBoards(response.data);
       // console.log(response.data);
     } catch (error) {
       console.error("Error displaying boards:", error);
     }
   };
-
-  
 
   const showModal = () => {
     setAddNew(!addNew);
@@ -53,7 +53,7 @@ const Home = () => {
     }
   };
   
-  const boardsByCategory =
+  /*const boardsByCategory =
     activeCategory && activeCategory !== "All"
       ? boards.filter((p) => p.category.toLowerCase() === activeCategory.toLowerCase())
       : boards
@@ -63,10 +63,10 @@ const Home = () => {
 
   const boardsToShow = searchInputValue
     ? boardsByCategory.filter((p) => p.title.toLowerCase().indexOf(searchInputValue.toLowerCase()) !== -1)
-    : boardsByCategory
+    : boardsByCategory*/
 
     const displayBoards = () => {
-      return boardsToShow.map((board) => (
+      return filteredBoards.map((board) => (
         <div key={board.board_id} className="board-card card">
           <img
             src={`https://picsum.photos/200/300?random=${board.board_id}`}
@@ -86,6 +86,33 @@ const Home = () => {
       ));
     };
 
+    const handleCategoryClick = (category) => {
+      setActiveCategory(category);
+      if (category === "All") {
+        setFilteredBoards(boards);
+      } else if (category === "Recent") {
+        const sortedByDate = [...boards].sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+        setFilteredBoards(sortedByDate);
+      } else {
+        const filtered = boards.filter((board) => board.category.toLowerCase() === category.toLowerCase());
+        setFilteredBoards(filtered);
+      }
+    };
+  
+    const handleSearchInputChange = (e) => {
+      setSearchInputValue(e.target.value);
+      filterBoards(e.target.value);
+    };
+  
+    const filterBoards = (searchTerm) => {
+      const filtered = boards.filter((board) =>
+        board.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredBoards(filtered);
+    };
+
   return (
     <div className="home">
       <Header />
@@ -95,7 +122,7 @@ const Home = () => {
           type="text"
           placeholder="Search..."
           value={searchInputValue}
-          onChange={(e) => setSearchInputValue(e.target.value)}
+          onChange={handleSearchInputChange}
         />
       </main>
 
@@ -129,7 +156,7 @@ const Home = () => {
         {/* <ul className={`category-menu category-buttons`}> */}
             {categories.map((cat) => (
               <li className={activeCategory === cat ? "is-active" : ""} key={cat}>
-                <button className="button-common category-button" onClick={() => setActiveCategory(cat)}>{cat}</button>
+                <button className="button-common category-button" onClick={() => handleCategoryClick(cat)}>{cat}</button>
               </li>
             ))}
           {/* </ul> */}
