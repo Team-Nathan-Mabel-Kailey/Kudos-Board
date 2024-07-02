@@ -14,7 +14,7 @@ const Home = () => {
   const [searchInputValue, setSearchInputValue] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const categories = ["All", "Recent", "Celebration", "Thank You", "Inpiration"];
+  const categories = ["All", "Recent", "Celebration", "Thank You", "Inspiration"];
 
   const baseUrl = "http://localhost:3000/";
 
@@ -32,26 +32,7 @@ const Home = () => {
     }
   };
 
-  const displayBoards = () => {
-    return boardsToShow.map((board) => (
-      <div key={board.board_id} className="board-card card">
-        <img
-          src={`https://picsum.photos/200/300?random=${board.board_id}`}
-          alt={board.title}
-        />
-        <h3>{board.title}</h3>
-        <p>{board.category}</p>
-        <div className="card-buttons">
-          <Link to={`/boards/${board.board_id}`} className="button-common view-board">
-          View Board
-        </Link>
-          <button className="button-common delete-board" onClick={() => deleteBoard(board.board_id)}>
-            Delete Board
-          </button>
-        </div>
-      </div>
-    ));
-  };
+  
 
   const showModal = () => {
     setAddNew(!addNew);
@@ -60,10 +41,6 @@ const Home = () => {
   const handleOnCreateBoard = () => {
     fetchBoards();
     setAddNew(false);
-  // const handleOnCreate = () => {
-  //   fetchBoards();
-  //   setAddNew(false);
-  // };
 }
 
   const deleteBoard = async (boardId) => {
@@ -75,16 +52,39 @@ const Home = () => {
     console.error("Error deleting board:", error);
     }
   };
-
-  const boardsToShow = Boolean(searchInputValue)
-    ? boardsByCategory.filter((p) => p.name.toLowerCase().indexOf(searchInputValue.toLowerCase()) !== -1)
-    : boardsByCategory
-
   
   const boardsByCategory =
-    Boolean(activeCategory) && activeCategory !== "All Categories"
-      ? boards.filter((p) => p.category === activeCategory)
+    activeCategory && activeCategory !== "All"
+      ? boards.filter((p) => p.category.toLowerCase() === activeCategory.toLowerCase())
       : boards
+
+  console.log(activeCategory);
+  console.log(boards);
+
+  const boardsToShow = searchInputValue
+    ? boardsByCategory.filter((p) => p.title.toLowerCase().indexOf(searchInputValue.toLowerCase()) !== -1)
+    : boardsByCategory
+
+    const displayBoards = () => {
+      return boardsToShow.map((board) => (
+        <div key={board.board_id} className="board-card card">
+          <img
+            src={`https://picsum.photos/200/300?random=${board.board_id}`}
+            alt={board.title}
+          />
+          <h3>{board.title}</h3>
+          <p>{board.category}</p>
+          <div className="card-buttons">
+            <Link to={`/boards/${board.board_id}`} className="button-common view-board">
+            View Board
+          </Link>
+            <button className="button-common delete-board" onClick={() => deleteBoard(board.board_id)}>
+              Delete Board
+            </button>
+          </div>
+        </div>
+      ));
+    };
 
   return (
     <div className="home">
