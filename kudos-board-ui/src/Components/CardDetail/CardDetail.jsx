@@ -27,6 +27,7 @@ const CardDetail = () => {
                 <Modal 
                     show={selectedCard !== null}
                     onClose={() => setSelectedCard(null)}
+                    cardId={cardId}
                 />
             )}
         </>

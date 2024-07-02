@@ -21,19 +21,22 @@ function App() {
   const baseUrl = "http://localhost:3000/";
 
   useEffect(() => {
-    const fetchBoards = async () => {
-      setIsFetching(true);
-      try {
-        const response = await axios.get(baseUrl + "boards");   // Gets all boards
-        setBoards(response.data);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setIsFetching(false);
-      }
-    };
     fetchBoards();
   }, []);
+
+  const fetchBoards = async () => {
+    setIsFetching(true);
+    try {
+      const response = await axios.get(baseUrl + "boards");   // Gets all boards
+      setBoards(response.data);
+      
+    } catch (err) {
+      setError(err);
+    } finally {
+      setIsFetching(false);
+    }
+  };
+
 
   const handleOnSearchInputChange = (event) => {
     setSearchInputValue(event.target.value);
@@ -49,6 +52,7 @@ function App() {
             searchInputValue={searchInputValue}
             handleOnSearchInputChange={handleOnSearchInputChange}
       />
+
         
       <Routes>
           <Route

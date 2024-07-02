@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import BoardList from "../BoardList/boardList"
 import "./Home.css"
 
@@ -24,5 +25,12 @@ function Home({isFetching, boards, searchInputValue, activeCategory }) {
     </div>
   )
 }
+
+Home.propTypes = {
+  isFetching: PropTypes.bool.isRequired,
+  boards: PropTypes.array.isRequired,
+  searchInputValue: PropTypes.string.isRequired,
+  activeCategory: PropTypes.string.isRequired,
+};
 
 export default Home;

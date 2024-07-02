@@ -4,7 +4,6 @@ import { BrowserRouter as Route, Routes, Link, BrowserRouter } from "react-route
 
 const Card = (cardNum, viewBoard, deleteBoard) => {
     return (
-        <BrowserRouter>
             <div className="home-card">
                 <div className="card-content">
                     <img src={"https://picsum.photos/300/400"} alt={"title"}/>
@@ -12,13 +11,12 @@ const Card = (cardNum, viewBoard, deleteBoard) => {
                     <h3 className="card-category">{cardNum.category}</h3>
 
                     <div className="card-buttons">
-                        <Link to={`/card-details/${cardNum.id}`}><button className="view-button">View Board</button></Link>
+                        <Link to={`/card-details/${cardNum.card_id}`}><button className="view-button">View Board</button></Link>
                         
                         <button className="delete-button" onClick={deleteBoard}>Delete Board</button>
                     </div>
                 </div>
             </div>
-        </BrowserRouter>
     )
 }
 
