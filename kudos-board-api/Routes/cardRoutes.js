@@ -13,10 +13,9 @@ const router = express.Router();
 
 router.post('/', createCard);
 router.get('/', getAllCards);
-router.get('/:id', getCardById);
+router.get('/:card_id', getCardById);
 router.put('/:card_id', updateCard);
 router.delete('/:card_id', deleteCard);
 router.put('/:id/upvote', upvoteCard);
-router.get('/board/:boardId', getCardsInBoardController);
 
 module.exports = router;
