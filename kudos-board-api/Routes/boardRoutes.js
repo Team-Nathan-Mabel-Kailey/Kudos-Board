@@ -5,7 +5,6 @@ const {
     getBoardById,
     updateBoard,
     deleteBoard,
-    addCardToBoard,
     getCardsInBoard,
 } = require('../Controllers/boardController');
 
@@ -16,7 +15,6 @@ router.get('/', getAllBoards);
 router.get('/:board_id', getBoardById);
 router.put('/:board_id', updateBoard);
 router.delete('/:board_id', deleteBoard);
-router.post('/:board_id/cards', addCardToBoard);
 router.get('/:board_id/cards', getCardsInBoard);
 
 module.exports = router;
