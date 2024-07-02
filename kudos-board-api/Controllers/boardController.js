@@ -96,7 +96,7 @@ const addCardToBoard = async (req, res) => {
 const getCardsInBoard = async (req, res) => {
     const { board_id } = req.params;
     try {
-        const cards = await boardModel.getCardsInBoard(board_id);
+        const cards = await cardModel.getCardsInBoard(board_id);
         res.status(200).json(cards);
     } catch (error) {
         console.error('Error while getting cards in board:', error.message);
