@@ -24,7 +24,7 @@ const BoardList = () => {
 
   const fetchCards = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/boards/${boardId}`);
+      const response = await axios.get(`http://localhost:3000/boards/${boardId}/cards`);
       console.log(response.data);
       setCards(response.data);
     } catch (error) {
@@ -46,15 +46,9 @@ const BoardList = () => {
     setAddNew(!addNew);
   };
 
-
-
-  const handleOnCreate = (newCard) => {
-    if (newCard && newCard.card_id) {
-      setCards([...cards, newCard]);
-      setAddNew(false);
-    } else {
-      console.error("Invalid info:", newCard);
-    }
+  const handleOnCreate = () => {
+    fetchCards();
+    setAddNew(false);
   };
 
   return (
@@ -71,14 +65,19 @@ const BoardList = () => {
         {addNew && (
           <Modal
             boardId={boardId}
+            show={addNew}
             onCreation={handleOnCreate}
-            onClose={() => setAddNew(null)}
+            onClose={showModal}
+            // onClose={() => setAddNew(null)}
           />
         )}
       </div>
 
       <div className="card-list">
         {cards.map((card) => (
+          /*<div className="card" key={card.card_id}>
+            <Card card={card} />
+          </div> */
             <div key={card.card_id} className="card">
                 <Card
                   card={card}
@@ -88,6 +87,7 @@ const BoardList = () => {
             </div>
         ))}
       </div>
+
       <Footer />
     </div>
   );

@@ -1,21 +1,21 @@
+import React from "react";
 import "./Card.css";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import axios from "axios";
 
-const Card = ({ card, fetchBoards, baseUrl }) => {
-    // Add 'card' to props validation
-    const { message, gifUrl, author } = card;
-    const [upvotes, setUpvotes] = useState(card.upvotes);
+const Card = ({ card }) => {
+  const { message, gifUrl, author, card_id } = card;
+  const [upvotes, setUpvotes] = useState(card.upvotes);
 
-    const handleUpvote = async () => {
-        try {
-        await axios.put(`http://localhost3000/boards/${card.board_id}/cards/${card.card_id}/upvote`, { upvotes: upvotes + 1 });
-        setUpvotes(upvotes + 1);
-        } catch (error) {
-        console.error("Error upvoting card:", error);
-        }
-    };
+  const handleUpvote = async () => {
+    try {
+      await axios.put(`http://localhost:3000/cards/${card_id}/upvote`, { upvotes: upvotes + 1 });
+      setUpvotes(upvotes + 1);
+    } catch (error) {
+      console.error("Error upvoting card:", error);
+    }
+  };
 
     const deleteCard = async (cardId) => {
         try{
@@ -42,8 +42,8 @@ const Card = ({ card, fetchBoards, baseUrl }) => {
 
 export default Card;
 
-Card.propTypes = {
+/*Card.propTypes = {
     card: PropTypes.object.isRequired,
     fetchBoards: PropTypes.func.isRequired,
     baseUrl: PropTypes.string.isRequired
-};
+}; */

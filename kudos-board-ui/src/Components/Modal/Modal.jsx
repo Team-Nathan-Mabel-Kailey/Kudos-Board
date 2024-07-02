@@ -1,12 +1,12 @@
 import './Modal.css'
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import axios from "axios";
 import { useState } from "react";
 
-const Modal = (show, onClose, onSuccess, cardId) => { 
+const Modal = ({ onClose, boardId, onCreation }) => {
     const apiKey = import.meta.env.VITE_API_KEY;
 
-    const[title, setTitle] = useState("");
+    // const[title, setTitle] = useState("");
     const[description, setDescription] = useState("");
     const[owner, setOwner] = useState("");
 
@@ -14,10 +14,6 @@ const Modal = (show, onClose, onSuccess, cardId) => {
     const [selectedGif, setSelectedGif] = useState(null); 
     const [gif, setGif] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
-
-    // if(!show) {
-    //     return null;
-    // }
 
     const getGifs = async () => {
         try {
@@ -42,18 +38,22 @@ const Modal = (show, onClose, onSuccess, cardId) => {
 
     const handleCreateCard = async () => {
         try {
-            if(!title || !description || !gif) {
+            /* if(!description || !gif) {
                 alert("Fill out all fields!");
                 return;
-            }
+            } */
 
-            const response = axios.post(`http://localhost:3000/card-details/${cardId}/cards`, {
-                title: title,
-                description: description,
-                gif: gif,
-                owner: 'owner',
+            const response = await axios.post(`http://localhost:3000/boards/${boardId}/cards`, {
+                message: description,
+                gifUrl: gif,
+                author: owner,
             });
 
+            console.log(response);
+            // const newCard = response.data;
+
+            onCreation();
+            // setTitle("");
             // const newCard = response.data;
 
             // onSuccess(newCard);
@@ -80,7 +80,7 @@ const Modal = (show, onClose, onSuccess, cardId) => {
                         <h2>Create a card</h2>
 
                         <div className='modal-inputs'>
-                            <input type='text' placeholder='Enter Card Title' value={title} onChange={(e) => setTitle(e.target.value)}/>
+        
                             <input type='text' placeholder='Enter Card Description' value={description} onChange={(e) => setDescription(e.target.value)}/>
                             <input type='text' placeholder='Search GIFs...' value = {searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
                             <button className='modal-search-button' onClick={getGifs}>Search</button>
@@ -117,9 +117,9 @@ const Modal = (show, onClose, onSuccess, cardId) => {
 
 export default Modal
 
-Modal.propTypes = {
+/* Modal.propTypes = {
     // show: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
     // cardId: PropTypes.string.isRequired,
     // onSuccess: PropTypes.func.isRequired
-};
+}; */

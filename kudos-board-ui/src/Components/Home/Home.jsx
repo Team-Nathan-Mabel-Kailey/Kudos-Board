@@ -54,10 +54,14 @@ const Home = () => {
     setAddNew(!addNew);
   };
 
+  const handleOnCreateBoard = () => {
+    fetchBoards();
+    setAddNew(false);
   // const handleOnCreate = () => {
   //   fetchBoards();
   //   setAddNew(false);
   // };
+}
 
   const deleteBoard = async (boardId) => {
     try{
@@ -115,7 +119,9 @@ const Home = () => {
           Create a New Board
         </button>
         {addNew && (
-          <BoardModal onClose={showModal} />
+          <BoardModal show={addNew}
+          onCreation={handleOnCreateBoard}
+          onClose={showModal}/>
         )}
       </div>
       
