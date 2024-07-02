@@ -19,11 +19,11 @@ const handleUpvote = async () => {
 
     const deleteCard = async (cardId) => {
         try{
-            console.log("deleting board", cardId);
+            console.log("deleting card", cardId);
             await axios.delete(baseUrl + `cards/${cardId}`);
             fetchCards();
         } catch (error){
-        console.error("Error deleting board:", error);
+        console.error("Error deleting card:", error);
         }
     };
 
