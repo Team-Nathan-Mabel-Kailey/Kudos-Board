@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-// import axios from "axios";
+import axios from "axios";
 
 import './App.css'
 import Footer from '../Footer/Footer.jsx'

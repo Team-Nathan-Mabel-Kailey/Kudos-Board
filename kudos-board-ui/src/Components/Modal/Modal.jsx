@@ -2,7 +2,8 @@ import './Modal.css'
 import PropTypes from 'prop-types';
 
 const Modal = ({show, onClose}) => {
-    
+    // const apiKey = import.meta.env.VITE_API_KEY;
+
     if(!show) {
         return null;
     }
