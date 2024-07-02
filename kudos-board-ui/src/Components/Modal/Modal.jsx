@@ -6,7 +6,7 @@ import { useState } from "react";
 const Modal = ({ onClose, boardId, onCreation }) => {
     const apiKey = import.meta.env.VITE_API_KEY;
 
-    // const[title, setTitle] = useState("");
+    const[name, setName] = useState("");
     const[description, setDescription] = useState("");
     const[owner, setOwner] = useState("");
 
@@ -38,26 +38,19 @@ const Modal = ({ onClose, boardId, onCreation }) => {
 
     const handleCreateCard = async () => {
         try {
-            /* if(!description || !gif) {
-                alert("Fill out all fields!");
-                return;
-            } */
-
-            const response = await axios.post(`http://localhost:3000/boards/${boardId}/cards`, {
+            console.log(name);
+            const response = await axios.post(`http://localhost:3000/cards`, {
                 message: description,
                 gifUrl: gif,
                 author: owner,
+                title: name,
+                boardId: parseInt(boardId)
             });
 
             console.log(response);
-            // const newCard = response.data;
 
             onCreation();
-            // setTitle("");
-            // const newCard = response.data;
-
-            // onSuccess(newCard);
-            setTitle("");
+            setName("");
             setDescription("");
             setGif("");
             setOwner("");
@@ -80,7 +73,7 @@ const Modal = ({ onClose, boardId, onCreation }) => {
                         <h2>Create a card</h2>
 
                         <div className='modal-inputs'>
-        
+                            <input type='text' placeholder='Enter Title' value={name} onChange={(e) => setName(e.target.value)}/>
                             <input type='text' placeholder='Enter Card Description' value={description} onChange={(e) => setDescription(e.target.value)}/>
                             <input type='text' placeholder='Search GIFs...' value = {searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
                             <button className='modal-search-button' onClick={getGifs}>Search</button>

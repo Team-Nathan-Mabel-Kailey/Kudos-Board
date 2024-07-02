@@ -71,22 +71,10 @@ const deleteBoard = async (req, res) => {
     }
 };
 
-const getCardsInBoard = async (req, res) => {
-    const { board_id } = req.params;
-    try {
-        const cards = await cardModel.getCardsInBoard(board_id);
-        res.status(200).json(cards);
-    } catch (error) {
-        console.error('Error while getting cards in board:', error.message);
-        res.status(400).json({ error: error.message });
-    }
-};
-
 module.exports = {
     createBoard,
     getAllBoards,
     getBoardById,
     updateBoard,
     deleteBoard,
-    getCardsInBoard,
 };

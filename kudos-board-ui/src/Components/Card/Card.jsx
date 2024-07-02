@@ -6,7 +6,7 @@ import { useState } from "react";
 import axios from "axios";
 
 const Card = ({ card, fetchCards, baseUrl}) => {
-const { message, gifUrl, author, card_id } = card;
+const { title, message, gifUrl, author, card_id } = card;
 const [upvotes, setUpvotes] = useState(card.upvotes);
 
 const handleUpvote = async () => {
@@ -31,6 +31,7 @@ const handleUpvote = async () => {
     return (
         <div className="card home-card">
             <div className="card-content">
+                <h3>{title}</h3>
                 <p>{message}</p>
                 <img src={gifUrl} alt="GIF" />
                 <p>{author}</p>
