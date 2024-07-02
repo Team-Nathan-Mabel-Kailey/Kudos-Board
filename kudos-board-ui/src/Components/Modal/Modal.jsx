@@ -101,10 +101,10 @@ const Modal = ({ onClose, boardId, onCreation }) => {
                             )}
 
 
-                            <input type='text' placeholder='Enter GIF URL' onChange={(e) => setGif(e.target.value)}/>
-                            <button className='modal-search-button'>Copy GIF URL</button>
+                            <input type='text' placeholder='Enter GIF URL' value = {gif} onChange={(e) => setGif(e.target.value)}/>
+                            <button className='modal-search-button' onClick={() => {navigator.clipboard.writeText(gif)}}>Copy GIF URL </button>
 
-                            <input type='text' placeholder='Enter Owner (optional)' value={owner} onChange={(e) => setOwner(e.target.value)}/>
+                            <input type='text' placeholder='Enter Owner (optional)' value={owner} onChange={(e) => setOwner(e.target.value)} />
                             <button className='modal-create-button' onClick={handleCreateCard}>Create Card</button>
                         </div>
 
