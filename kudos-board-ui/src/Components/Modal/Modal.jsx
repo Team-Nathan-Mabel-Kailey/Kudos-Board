@@ -16,7 +16,7 @@ const Modal = ({show, onClose}) => {
                     </div>
 
                     <div className='modal-body'>
-                        <h2>Create a board</h2>
+                        <h2>Create a card</h2>
 
                         <div className='modal-inputs'>
                             <input type='text' placeholder='Enter Card Title' />

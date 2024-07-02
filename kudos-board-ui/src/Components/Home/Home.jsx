@@ -1,7 +1,9 @@
 import BoardList from "../BoardList/boardList"
+import NavBar from "../NavBar/NavBar"
+import BoardModal from "../BoardModal/BoardModal.jsx"
 import "./Home.css"
 
-function Home({isFetching, boards, searchInputValue, activeCategory }) {
+function Home({isFetching, boards, searchInputValue, activeCategory, setActiveCategory, handleOnSearchInputChange, newBoard, setNewBoard }) {
 
   // Filters boards by the active category if it is not 'All Categories'.
   const boardsByCategory =
@@ -17,10 +19,23 @@ function Home({isFetching, boards, searchInputValue, activeCategory }) {
 
   return (
     <div className="Home">
+      <NavBar
+            activeCategory={activeCategory}
+            setActiveCategory={setActiveCategory}
+            searchInputValue={searchInputValue}
+            handleOnSearchInputChange={handleOnSearchInputChange}
+      />
+      <button onClick={() => setNewBoard(true)}>Create a New Board</button>
       <BoardList
         boards={boardsToShow}
         isFetching={isFetching}
       />
+      {newBoard && (
+        <BoardModal 
+            show={newBoard !== false}
+            onClose={() => setNewBoard(false)}
+        />
+      )}
     </div>
   )
 }

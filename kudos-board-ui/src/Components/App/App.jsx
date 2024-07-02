@@ -6,8 +6,7 @@ import './App.css'
 import Footer from '../Footer/Footer.jsx'
 import Header from '../Header/Header.jsx' 
 import Home from "../Home/Home.jsx";
-import NavBar from '../NavBar/NavBar.jsx'
-import CardDetail from '../CardDetail/CardDetail.jsx'
+import CardDetail from "../CardDetail/CardDetail.jsx"
 
 function App() {
 
@@ -42,14 +41,7 @@ function App() {
   return (
     <Router>
       <Header />
-
-      <NavBar
-            activeCategory={activeCategory}
-            setActiveCategory={setActiveCategory}
-            searchInputValue={searchInputValue}
-            handleOnSearchInputChange={handleOnSearchInputChange}
-      />
-        
+  
       <Routes>
           <Route
             path="/"
@@ -60,6 +52,9 @@ function App() {
                 isFetching={isFetching}
                 activeCategory={activeCategory}
                 setActiveCategory={setActiveCategory}
+                handleOnSearchInputChange={handleOnSearchInputChange}
+                newBoard={newBoard}
+                setNewBoard={setNewBoard}
               />
             }
         />
