@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Home.css";
@@ -38,12 +38,14 @@ const Home = () => {
         />
         <h3>{board.title}</h3>
         <p>{board.category}</p>
-        <Link to={`/boards/${board.board_id}`} className="button-common view-board">
-        View Board
-      </Link>
-        <button className="button-common delete-board">
-          Delete Board
-        </button>
+        <div className="card-buttons">
+          <Link to={`/boards/${board.board_id}`} className="button-common view-board">
+          View Board
+        </Link>
+          <button className="button-common delete-board">
+            Delete Board
+          </button>
+        </div>
       </div>
     ));
   };
@@ -52,14 +54,14 @@ const Home = () => {
     setAddNew(!addNew);
   };
 
-  const handleOnCreate = () => {
-    fetchBoards();
-    setAddNew(false);
-  };
+  // const handleOnCreate = () => {
+  //   fetchBoards();
+  //   setAddNew(false);
+  // };
 
   return (
     <div className="home">
-     <Header />
+    <Header />
 
       <main className="search">
         <input

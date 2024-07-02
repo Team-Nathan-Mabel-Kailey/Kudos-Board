@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-import './boardList.css'
+import './BoardList.css'
 import Footer from '../Footer/Footer.jsx'
 import Header from '../Header/Header.jsx' 
 import Card from "../Card/Card.jsx"
 import Modal from "../Modal/Modal.jsx"
+import "../Card/Card.css";
 
 // what is it: list of cards inside each board
-const boardList = () => {
+const BoardList = () => {
   const { boardId } = useParams();
   const [cards, setCards] = useState([]);
   const [boardName, setBoardName] = useState("");
@@ -69,19 +70,18 @@ const boardList = () => {
           <Modal
             boardId={boardId}
             onCreation={handleOnCreate}
-            onClose={toggleForm}
+            onClose={() => setAddNew(null)}
           />
         )}
       </div>
 
       <div className="card-list">
         {cards.map((card) => (
-          <div className="card">
-            <Card
-              key={card.card_id}
-              card={card}
-            />
-          </div>
+            <div key={card.card_id} className="card">
+                <Card
+                  card={card}
+                />
+            </div>
         ))}
       </div>
       <Footer />
@@ -89,4 +89,4 @@ const boardList = () => {
   );
 };
 
-export default boardList;
+export default BoardList;
