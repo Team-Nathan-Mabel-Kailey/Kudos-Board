@@ -24,7 +24,7 @@ const BoardList = () => {
 
   const fetchCards = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/boards/${boardId}/cards`);
+      const response = await axios.get(`http://localhost:3000/boards/${boardId}`);
       console.log(response.data);
       setCards(response.data);
     } catch (error) {
@@ -45,6 +45,8 @@ const BoardList = () => {
   const showModal = () => {
     setAddNew(!addNew);
   };
+
+
 
   const handleOnCreate = (newCard) => {
     if (newCard && newCard.card_id) {
@@ -80,6 +82,8 @@ const BoardList = () => {
             <div key={card.card_id} className="card">
                 <Card
                   card={card}
+                  fetchCards={fetchCards}
+                  baseUrl={"http://localhost:3000"}
                 />
             </div>
         ))}

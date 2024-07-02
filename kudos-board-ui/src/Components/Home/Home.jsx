@@ -42,7 +42,7 @@ const Home = () => {
           <Link to={`/boards/${board.board_id}`} className="button-common view-board">
           View Board
         </Link>
-          <button className="button-common delete-board">
+          <button className="button-common delete-board" onClick={() => deleteBoard(board.board_id)}>
             Delete Board
           </button>
         </div>
@@ -58,6 +58,16 @@ const Home = () => {
   //   fetchBoards();
   //   setAddNew(false);
   // };
+
+  const deleteBoard = async (boardId) => {
+    try{
+      console.log("deleting board", boardId);
+      await axios.delete(baseUrl + `boards/${boardId}`);
+      fetchBoards();
+    } catch (error){
+    console.error("Error deleting board:", error);
+    }
+  };
 
   return (
     <div className="home">
