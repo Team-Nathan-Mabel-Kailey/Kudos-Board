@@ -1,23 +1,30 @@
-import './Card.css'
-import { BrowserRouter as Route, Routes, Link, BrowserRouter } from "react-router-dom";
+import "./Card.css";
+import axios from "axios";
 
+const Card = ({ card }) => {
+  const { message, gifUrl, author } = card;
+  const [upvotes, setUpvotes] = useState(card.upvotes);
 
-const Card = (cardNum, viewBoard, deleteBoard) => {
-    return (
-            <div className="home-card">
-                <div className="card-content">
-                    <img src={"https://picsum.photos/300/400"} alt={"title"}/>
-                    <h2 className="card-title">{cardNum.title}</h2>
-                    <h3 className="card-category">{cardNum.category}</h3>
+  const handleUpvote = async () => {
+    try {
+      await axios.put(`http://localhost3000/boards/${card.board_id}/cards/${card.card_id}/upvote`, { upvotes: upvotes + 1 });
+      setUpvotes(upvotes + 1);
+    } catch (error) {
+      console.error("Error upvoting card:", error);
+    }
+  };
 
-                    <div className="card-buttons">
-                        <Link to={`/card-details/${cardNum.card_id}`}><button className="view-button">View Board</button></Link>
-                        
-                        <button className="delete-button" onClick={deleteBoard}>Delete Board</button>
-                    </div>
-                </div>
-            </div>
-    )
-}
+  return (
+    <div className="card">
+      <p>{message}</p>
+      <img src={gifUrl} alt="GIF" />
+      <p>{author}</p>
+      <button className='upvote-button' onClick={handleUpvote}>Upvote: {upvotes}</button>
+      <button className="delete-button">
+        Delete
+      </button>
+    </div>
+  );
+};
 
-export default Card
+export default Card;

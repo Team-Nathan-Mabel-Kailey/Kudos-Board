@@ -1,30 +1,115 @@
-import PropTypes from 'prop-types';
-import BoardList from "../BoardList/boardList"
-import "./Home.css"
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import "./Home.css";
+import BoardModal from "../BoardModal/BoardModal"
+import Footer from '../Footer/Footer.jsx'
+import Header from '../Header/Header.jsx'
 
-function Home({isFetching, boards, searchInputValue, activeCategory }) {
+const Home = () => {
+  const [boards, setBoards] = useState([]);
+  const [addNew, setAddNew] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  // Filters boards by the active category if it is not 'All Categories'.
-  const boardsByCategory =
-    Boolean(activeCategory) && activeCategory !== "All Categories"
-      ? boards.filter((p) => p.category === activeCategory)
-      : boards
+  const baseUrl = "http://localhost:3000/";
 
-  // Filters boards by the active category if it is not 'All Categories',
-  // then further filters the result by the search input value if it is not empty.
-  const boardsToShow = Boolean(searchInputValue)
-    ? boardsByCategory.filter((p) => p.name.toLowerCase().indexOf(searchInputValue.toLowerCase()) !== -1)
-    : boardsByCategory
+  useEffect(() => {
+    fetchBoards();
+  }, []);
+
+  const fetchBoards = async () => {
+    try {
+      const response = await axios.get(baseUrl + "boards");
+      setBoards(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error displaying boards:", error);
+    }
+  };
+
+  const displayBoards = () => {
+    return boards.map((board) => (
+      <div key={board.board_id} className="board-card">
+        <img
+          src={`https://picsum.photos/200/300?random=${board.board_id}`}
+          alt={board.title}
+        />
+        <h3>{board.title}</h3>
+        <p>{board.category}</p>
+        <Link to={`/boards/${board.board_id}`} className="button-common view-board">
+        View Board
+      </Link>
+        <button className="button-common delete-board">
+          Delete Board
+        </button>
+      </div>
+    ));
+  };
+
+  const showModal = () => {
+    setAddNew(!addNew);
+  };
+
+  const handleOnCreate = () => {
+    fetchBoards();
+    setAddNew(false);
+  };
 
   return (
-    <div className="Home">
-      <BoardList
-        boards={boardsToShow}
-        isFetching={isFetching}
-      />
+    <div className="home">
+     <Header />
+
+      <main className="search">
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </main>
+
+      <div className="category-buttons">
+        <button
+          className="button-common category-button"
+        >
+          All
+        </button>
+        <button
+          className="button-common category-button"
+        >
+          Recent
+        </button>
+        <button
+          className="button-common category-button"
+        >
+          Celebration
+        </button>
+        <button
+          className="button-common category-button"
+        >
+          Thank You
+        </button>
+        <button
+          className="button-common category-button"
+        >
+          Inspiration
+        </button>
+      </div>
+
+      <div className="button-container">
+        <button className="button-common create-brd-btn" onClick={showModal}>
+          Create a New Board
+        </button>
+        {addNew && (
+          <BoardModal onCreation={handleOnCreate} onClose={showModal} />
+        )}
+      </div>
+      
+      <section className="board-list">{displayBoards()}</section>
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
 Home.propTypes = {
   isFetching: PropTypes.bool.isRequired,

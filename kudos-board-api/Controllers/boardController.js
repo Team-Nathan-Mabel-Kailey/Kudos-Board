@@ -25,6 +25,12 @@ const getAllBoards = async (req, res) => {
 };
 
 const getBoardById = async (req, res) => {
+<<<<<<< HEAD
+    //const boardId = res.params.board_id
+    try {
+        const board = await boardModel.getBoardById(req.params.board_id);
+        res.status(200).json(board);
+=======
     const { board_id } = req.params;
     try {
         const board = await boardModel.getBoardById(board_id);
@@ -34,10 +40,17 @@ const getBoardById = async (req, res) => {
         } else {
             res.status(404).json({ error: 'Board not found' });
         }
+>>>>>>> 6f2890b069884de8557e168c0d6555e9379c29ae
     } catch (error) {
         console.error('Error while getting board:', error.message);
         res.status(400).json({ error: error.message });
     }
+<<<<<<< HEAD
+    /*if (!board) {
+        res.status(404).json({ error: 'Board not found' });
+    }*/
+=======
+>>>>>>> 6f2890b069884de8557e168c0d6555e9379c29ae
 };
 
 const updateBoard = async (req, res) => {
