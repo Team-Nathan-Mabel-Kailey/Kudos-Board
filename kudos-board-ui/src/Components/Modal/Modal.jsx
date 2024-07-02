@@ -1,30 +1,32 @@
 import './Modal.css'
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import axios from "axios";
 import { useState } from "react";
 
 const Modal = ({ onClose, boardId, onCreation }) => {
+    //Api Key 
     const apiKey = import.meta.env.VITE_API_KEY;
 
+    //Modal variables
     const[name, setName] = useState("");
     const[description, setDescription] = useState("");
     const[owner, setOwner] = useState("");
 
+    //Gif variables
     const [gifOptions, setGifOptions] = useState([]);
-    const [selectedGif, setSelectedGif] = useState(null); 
     const [gif, setGif] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
 
     const getGifs = async () => {
         try {
+            //Get gifs from Giphy API
             const response = await axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&limit=6&q=${searchTerm}`);
-            
             const data = await response.data.data;
             const gifUrl = data.map((gif) => gif.images.original.url);
 
+            //Set gif options
             setGifOptions(gifUrl);
 
-            console.log(data);
         } catch (error) {
             console.error(error);
         }
@@ -32,7 +34,6 @@ const Modal = ({ onClose, boardId, onCreation }) => {
 
     const handleSelectGif = (gifUrl) => {
         setGif(gifUrl);
-        setSelectedGif(gifUrl);
         setGifOptions([]);
     }
 
@@ -110,9 +111,8 @@ const Modal = ({ onClose, boardId, onCreation }) => {
 
 export default Modal
 
-/* Modal.propTypes = {
-    // show: PropTypes.bool.isRequired,
+Modal.propTypes = {
     onClose: PropTypes.func.isRequired,
-    // cardId: PropTypes.string.isRequired,
-    // onSuccess: PropTypes.func.isRequired
-}; */
+    boardId: PropTypes.string.isRequired,
+    onCreation: PropTypes.func.isRequired
+}; 
