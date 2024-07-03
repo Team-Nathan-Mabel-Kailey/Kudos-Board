@@ -1,28 +1,38 @@
 import './BoardModal.css'
+import PropTypes from 'prop-types';
 import axios from "axios";
 import { useState } from "react";
-import PropTypes from 'prop-types';
 
 const BoardModal = ({ onClose, onCreation }) => {
+    //Modal variables
     const[title, setTitle] = useState("");
     const[category, setCategory] = useState("");
     const[author, setAuthor] = useState("");
 
     const handleCreateBoard = async () => {
         try {
-            if (!title || !category || !author) {
-                alert("Fill out all fields!");
+            //Required fields
+            if (!title || !category) {
+                alert("Fill out author and category fields!");
                 return;
+            }
+
+            //Optional author name, defaults to "Author" if no name
+            let updatedAuthor = author;
+
+            if (author.trim() === "") {
+                updatedAuthor = "Author";
             }
 
             await axios.post(`http://localhost:3000/boards`, {
                 title: title,
                 category: category,
-                author: author,
+                author: updatedAuthor,
                 cards: []
             });
 
             onCreation();
+            //Reset fields for future user input
             setTitle("");
             setCategory("");
             setAuthor("");
@@ -32,15 +42,15 @@ const BoardModal = ({ onClose, onCreation }) => {
         }
     }
 
-    const handleTitleInput = (e) => {
+    const handleBoardTitleInput = (e) => {
         setTitle(e.target.value);
     };
 
-    const handleCategorySelection = (e) => {
+    const handleBoardCategorySelection = (e) => {
         setCategory(e.target.value);
     };
 
-    const handleAuthorInput = (e) => {
+    const handleBoardAuthorInput = (e) => {
         setAuthor(e.target.value);
     };
 
@@ -55,15 +65,17 @@ const BoardModal = ({ onClose, onCreation }) => {
                     <div className='modal-body'>
                         <h2>Create a board</h2>
                         <div className='modal-inputs'>
-                            <input type='text' placeholder='Enter Board Title' value={title} onChange={handleTitleInput}/>
-                            <select value={category} onChange={handleCategorySelection}>
+                            <input type='text' placeholder='Enter Board Title' value={title} onChange={handleBoardTitleInput}/>
+
+                            <select value={category} onChange={handleBoardCategorySelection}>
                                 <option value="">Select category</option>
                                 <option value="Recent">Recent</option>
                                 <option value="Celebration">Celebration</option>
                                 <option value="Thank You">Thank You</option>
                                 <option value="Inspiration">Inspiration</option>
                             </select>
-                            <input type='text' placeholder='Enter Author Name' value={author} onChange={handleAuthorInput}/>
+
+                            <input type='text' placeholder='Enter Author Name' value={author} onChange={handleBoardAuthorInput}/>
                             <button className='modal-create-button' onClick={handleCreateBoard}>Create Board</button>
                         </div>
 
@@ -74,7 +86,7 @@ const BoardModal = ({ onClose, onCreation }) => {
     )
 }
 
-export default BoardModal
+export default BoardModal;
 
 BoardModal.propTypes = {
     onClose: PropTypes.func.isRequired
