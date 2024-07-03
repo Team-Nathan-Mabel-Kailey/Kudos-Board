@@ -102,7 +102,7 @@ const Home = () => {
         </div>
 
         <div className="button-container">
-          <button className="button-common create-brd-btn" onClick={showModal}>
+          <button className="button-common create-btn" onClick={showModal}>
             Create a New Board
           </button>
           {addingNewBoard && (
