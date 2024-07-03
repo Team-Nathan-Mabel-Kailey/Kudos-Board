@@ -117,60 +117,36 @@ const Home = () => {
     <div className="home">
       <Header />
 
-      <main className="search">
-        <input
-          type="text"
-          placeholder="Search..."
-          value={searchInputValue}
-          onChange={handleSearchInputChange}
-        />
-      </main>
+      <div className="nav-bar">
+        <main className="search">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchInputValue}
+            onChange={handleSearchInputChange}
+          />
+        </main>
 
-      <div className="category-buttons ">
-        {/* <button
-          className="button-common category-button"
-        >
-          All
-        </button>
-        <button
-          className="button-common category-button"
-        >
-          Recent
-        </button>
-        <button
-          className="button-common category-button"
-        >
-          Celebration
-        </button>
-        <button
-          className="button-common category-button"
-        >
-          Thank You
-        </button>
-        <button
-          className="button-common category-button"
-        >
-          Inspiration
-        </button> */}
+        <div className="category-buttons ">
 
-        {/* <ul className={`category-menu category-buttons`}> */}
-            {categories.map((cat) => (
-              <li className={activeCategory === cat ? "is-active" : ""} key={cat}>
-                <button className="button-common category-button" onClick={() => handleCategoryClick(cat)}>{cat}</button>
-              </li>
-            ))}
-          {/* </ul> */}
-      </div>
+              {categories.map((cat) => (
+                <li className={activeCategory === cat ? "is-active" : ""} key={cat}>
+                  <button className="button-common category-button" onClick={() => handleCategoryClick(cat)}>{cat}</button>
+                </li>
+              ))}
 
-      <div className="button-container">
-        <button className="button-common create-brd-btn" onClick={showModal}>
-          Create a New Board
-        </button>
-        {addNew && (
-          <BoardModal show={addNew}
-          onCreation={handleOnCreateBoard}
-          onClose={showModal}/>
-        )}
+        </div>
+
+        <div className="button-container">
+          <button className="button-common create-brd-btn" onClick={showModal}>
+            Create a New Board
+          </button>
+          {addNew && (
+            <BoardModal show={addNew}
+            onCreation={handleOnCreateBoard}
+            onClose={showModal}/>
+          )}
+        </div>
       </div>
       
       <section className="board-list">{displayBoards()}</section>
