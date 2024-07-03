@@ -2,10 +2,10 @@
 import "./Card.css";
 import "./BoardCard.css";
 import PropTypes from "prop-types";
-import { useState } from "react";
 import axios from "axios";
+import { useState } from "react";
 
-const Card = ({ card, fetchCards, baseUrl}) => {
+const Card = ({ card, fetchCards, baseUrl }) => {
     const { title, message, gifUrl, author, card_id } = card;
     const [upvotes, setUpvotes] = useState(card.upvotes);
     const [comments, setComments] = useState([]);
