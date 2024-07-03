@@ -51,7 +51,7 @@
     color: black;
 }
 
-.board-list {
+.board-display {
     flex: 1;
     display: flex;
     flex-wrap: wrap;
