@@ -55,6 +55,12 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: space-evenly;
     gap: 20px;
     padding: 20px 0;
+    margin-bottom: 100px;
+}
+
+.board-card h1{
+    font-weight: bold;
 }

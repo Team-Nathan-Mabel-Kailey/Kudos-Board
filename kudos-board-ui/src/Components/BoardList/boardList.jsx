@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import './boardList.css'
+import "../Card/Card.css";
 import Footer from '../Footer/Footer.jsx'
 import Header from '../Header/Header.jsx' 
 import Card from "../Card/Card.jsx"
 import Modal from "../Modal/Modal.jsx"
-import "../Card/Card.css";
+
 
 // what is it: list of cards inside each board
 const BoardList = () => {
@@ -72,7 +73,7 @@ const BoardList = () => {
 
       <div className="card-list">
         {cards.map((card) => (
-          <div key={card.card_id} className="card">
+          <div key={card.card_id} className="board-card">
             <Card
               card={card}
               fetchCards={fetchCards}
