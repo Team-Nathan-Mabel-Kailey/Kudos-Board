@@ -12,7 +12,7 @@ import "../Card/Card.css";
 const BoardList = () => {
   const { boardId } = useParams();
   const [cards, setCards] = useState([]);
-  const [boardName, setBoardName] = useState("");
+  const [boardTitle, setBoardTitle] = useState("");
   const [addingNewCard, setAddingNewCard] = useState(false);
 
   const baseUrl = "http://localhost:3000/";
@@ -34,7 +34,7 @@ const BoardList = () => {
   const fetchBoardTitle = async () => {
     try {
       const response = await axios.get(baseUrl + `boards/${boardId}`);
-      setBoardName(response.data.title);
+      setBoardTitle(response.data.title);
     } catch (error) {
       console.error("Error fetching board data:", error);
     }
@@ -55,7 +55,7 @@ const BoardList = () => {
         <span className="return"></span>
       </Link>
       <Header />
-      <h2>{boardName}</h2>
+      <h2>{boardTitle}</h2>
       <div className="center-create-button">
         <button className="create-card-btn" onClick={showModal}>
           Create a Card

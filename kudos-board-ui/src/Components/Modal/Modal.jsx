@@ -8,7 +8,7 @@ const Modal = ({ boardId, onClose, onCreation }) => {
     const apiKey = import.meta.env.VITE_API_KEY;
 
     //Modal variables
-    const[name, setName] = useState("");
+    const[title, setTitle] = useState("");
     const[message, setMessage] = useState("");
     const[author, setAuthor] = useState("");
 
@@ -28,7 +28,7 @@ const Modal = ({ boardId, onClose, onCreation }) => {
             setGifOptions(gifUrl);
 
         } catch (error) {
-            console.error(error);
+            console.error("Error getting gifs: ", error);
         }
     }
 
@@ -39,16 +39,30 @@ const Modal = ({ boardId, onClose, onCreation }) => {
 
     const handleCreateCard = async () => {
         try {
+            //Required fields
+            if (!title || !message || !gif) {
+                alert("Fill out title and message fields and select a gif!");
+                return;
+            }
+
+            //Optional author
+            let currentAuthor = author;
+            
+            if (author.trim() === "") {
+                currentAuthor = "Author";
+            }
+
             await axios.post(`http://localhost:3000/cards`, {
                 boardId: parseInt(boardId),
                 message: message,
                 gifUrl: gif,
-                author: author,
-                title: name
+                author: currentAuthor,
+                title: title
             });
 
             onCreation();
-            setName("");
+            //Reset fields for future user input
+            setTitle("");
             setMessage("");
             setGif("");
             setAuthor("");
@@ -57,6 +71,22 @@ const Modal = ({ boardId, onClose, onCreation }) => {
             console.error("Error creating card:", error);
         }
     }
+
+    const handleCardTitleInput = (e) => {
+        setTitle(e.target.value);
+    };
+
+    const handleCardMessageInput = (e) => {
+        setMessage(e.target.value);
+    };
+
+    const handleGifSearchInput = (e) => {
+        setSearchTerm(e.target.value);
+    };
+
+    const handleCardAuthorInput = (e) => {
+        setAuthor(e.target.value);
+    };
 
     return (
         <div>
@@ -70,9 +100,9 @@ const Modal = ({ boardId, onClose, onCreation }) => {
                         <h2>Create a card</h2>
 
                         <div className='modal-inputs'>
-                            <input type='text' placeholder='Enter Title' value={name} onChange={(e) => setName(e.target.value)}/>
-                            <input type='text' placeholder='Enter Card Description' value={message} onChange={(e) => setMessage(e.target.value)}/>
-                            <input type='text' placeholder='Search GIFs...' value = {searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
+                            <input type='text' placeholder='Enter Title' value={title} onChange={handleCardTitleInput}/>
+                            <input type='text' placeholder='Enter Card Description' value={message} onChange={handleCardMessageInput}/>
+                            <input type='text' placeholder='Search GIFs...' value = {searchTerm} onChange={handleGifSearchInput}/>
                             <button className='modal-search-button' onClick={getGifs}>Search</button>
 
                             {gifOptions.length > 0 && (
@@ -90,11 +120,10 @@ const Modal = ({ boardId, onClose, onCreation }) => {
                                 </div>
                             )}
 
-
                             <input type='text' placeholder='Enter GIF URL' value = {gif} onChange={(e) => setGif(e.target.value)}/>
                             <button className='modal-search-button' onClick={() => {navigator.clipboard.writeText(gif)}}>Copy GIF URL </button>
 
-                            <input type='text' placeholder='Enter Owner (optional)' value={author} onChange={(e) => setAuthor(e.target.value)} />
+                            <input type='text' placeholder='Enter Owner (optional)' value={author} onChange={handleCardAuthorInput} />
                             <button className='modal-create-button' onClick={handleCreateCard}>Create Card</button>
                         </div>
 
@@ -105,7 +134,7 @@ const Modal = ({ boardId, onClose, onCreation }) => {
     ) 
 } 
 
-export default Modal
+export default Modal;
 
 Modal.propTypes = {
     onClose: PropTypes.func.isRequired,
