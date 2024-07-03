@@ -52,7 +52,7 @@ const BoardList = () => {
   return (
     <div>
       <Link to="/">
-        <span className="back"></span>
+        <span className="return"></span>
       </Link>
       <Header />
       <h2>{boardName}</h2>
