@@ -58,7 +58,7 @@ const BoardList = () => {
       <Header />
       <h2>{boardTitle}</h2>
       <div className="center-create-button">
-        <button className="create-card-btn" onClick={showModal}>
+        <button className="button-common create-brd-btn" onClick={showModal}>
           Create a Card
         </button>
         {addingNewCard && (
