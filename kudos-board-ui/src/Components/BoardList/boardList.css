@@ -5,11 +5,23 @@ body {
     padding: 0;
 }
 
-.back {
-    font-size: 18px;
+.return {
     text-decoration: none;
-    color: #333;
-    margin: 20px;
+}
+
+.return span {
+    display: flex;
+    color: #008080;
+    font-size: 40px;
+    font-weight: bold;
+    padding: 40px 0 0 40px;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.return span:hover {
+    color: #004e4e;
+    font-weight: bold;
+    transform: translateY(-3px);
 }
 
 .center-create-button {
