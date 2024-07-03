@@ -4,19 +4,18 @@ import { useState } from "react";
 import PropTypes from 'prop-types';
 
 const BoardModal = ({ onClose, onCreation }) => {
-
     const[title, setTitle] = useState("");
     const[category, setCategory] = useState("");
     const[author, setAuthor] = useState("");
 
     const handleCreateBoard = async () => {
         try {
-            /* if(!description || !gif) {
+            if (!title || !category || !author) {
                 alert("Fill out all fields!");
                 return;
-            } */
+            }
 
-            const response = await axios.post(`http://localhost:3000/boards`, {
+            await axios.post(`http://localhost:3000/boards`, {
                 title: title,
                 category: category,
                 author: author,
@@ -28,11 +27,22 @@ const BoardModal = ({ onClose, onCreation }) => {
             setCategory("");
             setAuthor("");
 
-            console.log(response);
         } catch (error) {
-            console.error(error);
+            console.error("Error creating board:", error);
         }
     }
+
+    const handleTitleInput = (e) => {
+        setTitle(e.target.value);
+    };
+
+    const handleCategorySelection = (e) => {
+        setCategory(e.target.value);
+    };
+
+    const handleAuthorInput = (e) => {
+        setAuthor(e.target.value);
+    };
 
     return (
         <div>
@@ -44,17 +54,16 @@ const BoardModal = ({ onClose, onCreation }) => {
 
                     <div className='modal-body'>
                         <h2>Create a board</h2>
-
                         <div className='modal-inputs'>
-                            <input type='text' placeholder='Enter Board Title' value={title} onChange={(e) => setTitle(e.target.value)}/>
-                            <select value={category} onChange={(e) => setCategory(e.target.value)}>
+                            <input type='text' placeholder='Enter Board Title' value={title} onChange={handleTitleInput}/>
+                            <select value={category} onChange={handleCategorySelection}>
                                 <option value="">Select category</option>
                                 <option value="Recent">Recent</option>
                                 <option value="Celebration">Celebration</option>
                                 <option value="Thank You">Thank You</option>
                                 <option value="Inspiration">Inspiration</option>
                             </select>
-                            <input type='text' placeholder='Enter Author Name' value={author} onChange={(e) => setAuthor(e.target.value)}/>
+                            <input type='text' placeholder='Enter Author Name' value={author} onChange={handleAuthorInput}/>
                             <button className='modal-create-button' onClick={handleCreateBoard}>Create Board</button>
                         </div>
 

@@ -13,9 +13,9 @@ const BoardList = () => {
   const { boardId } = useParams();
   const [cards, setCards] = useState([]);
   const [boardName, setBoardName] = useState("");
-  const [addNew, setAddNew] = useState(false);
+  const [addingNewCard, setAddingNewCard] = useState(false);
 
-  // const baseUrl = "http://localhost:3000/";
+  const baseUrl = "http://localhost:3000/";
 
   useEffect(() => {
     fetchCards();
@@ -24,37 +24,35 @@ const BoardList = () => {
 
   const fetchCards = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/boards/${boardId}/cards`);
-      console.log(response.data);
+      const response = await axios.get(baseUrl + `boards/${boardId}/cards`);
       setCards(response.data);
     } catch (error) {
-      console.error("Error fetching cards:", error);
+      console.error("Error getting cards:", error);
     }
   };
 
   const fetchBoardTitle = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/boards/${boardId}`);
-      const title = response.data.title;
-      setBoardName(title);
+      const response = await axios.get(baseUrl + `boards/${boardId}`);
+      setBoardName(response.data.title);
     } catch (error) {
       console.error("Error fetching board data:", error);
     }
   };
 
   const showModal = () => {
-    setAddNew(!addNew);
+    setAddingNewCard(!addingNewCard);
   };
 
-  const handleOnCreate = () => {
+  const createCard = () => {
     fetchCards();
-    setAddNew(false);
+    setAddingNewCard(false);
   };
 
   return (
     <div>
       <Link to="/">
-        <span className="back"></span>
+        <span className="return"></span>
       </Link>
       <Header />
       <h2>{boardName}</h2>
@@ -62,29 +60,25 @@ const BoardList = () => {
         <button className="create-card-btn" onClick={showModal}>
           Create a Card
         </button>
-        {addNew && (
+        {addingNewCard && (
           <Modal
             boardId={boardId}
-            show={addNew}
-            onCreation={handleOnCreate}
+            show={addingNewCard}
+            onCreation={createCard}
             onClose={showModal}
-            // onClose={() => setAddNew(null)}
           />
         )}
       </div>
 
       <div className="card-list">
         {cards.map((card) => (
-          /*<div className="card" key={card.card_id}>
-            <Card card={card} />
-          </div> */
-            <div key={card.card_id} className="card">
-                <Card
-                  card={card}
-                  fetchCards={fetchCards}
-                  baseUrl={"http://localhost:3000/"}
-                />
-            </div>
+          <div key={card.card_id} className="card">
+            <Card
+              card={card}
+              fetchCards={fetchCards}
+              baseUrl={baseUrl}
+            />
+          </div>
         ))}
       </div>
 

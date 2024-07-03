@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import axios from "axios";
 import { useState } from "react";
 
-const Modal = ({ onClose, boardId, onCreation }) => {
+const Modal = ({ boardId, onClose, onCreation }) => {
     //Api Key 
     const apiKey = import.meta.env.VITE_API_KEY;
 
     //Modal variables
     const[name, setName] = useState("");
-    const[description, setDescription] = useState("");
-    const[owner, setOwner] = useState("");
+    const[message, setMessage] = useState("");
+    const[author, setAuthor] = useState("");
 
     //Gif variables
     const [gifOptions, setGifOptions] = useState([]);
@@ -39,26 +39,22 @@ const Modal = ({ onClose, boardId, onCreation }) => {
 
     const handleCreateCard = async () => {
         try {
-            console.log(name);
-            const response = await axios.post(`http://localhost:3000/cards`, {
-                message: description,
+            await axios.post(`http://localhost:3000/cards`, {
+                boardId: parseInt(boardId),
+                message: message,
                 gifUrl: gif,
-                author: owner,
-                title: name,
-                boardId: parseInt(boardId)
+                author: author,
+                title: name
             });
-
-            console.log(response);
 
             onCreation();
             setName("");
-            setDescription("");
+            setMessage("");
             setGif("");
-            setOwner("");
+            setAuthor("");
 
-            console.log(response);
         } catch (error) {
-            console.error(error);
+            console.error("Error creating card:", error);
         }
     }
 
@@ -75,7 +71,7 @@ const Modal = ({ onClose, boardId, onCreation }) => {
 
                         <div className='modal-inputs'>
                             <input type='text' placeholder='Enter Title' value={name} onChange={(e) => setName(e.target.value)}/>
-                            <input type='text' placeholder='Enter Card Description' value={description} onChange={(e) => setDescription(e.target.value)}/>
+                            <input type='text' placeholder='Enter Card Description' value={message} onChange={(e) => setMessage(e.target.value)}/>
                             <input type='text' placeholder='Search GIFs...' value = {searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
                             <button className='modal-search-button' onClick={getGifs}>Search</button>
 
@@ -98,7 +94,7 @@ const Modal = ({ onClose, boardId, onCreation }) => {
                             <input type='text' placeholder='Enter GIF URL' value = {gif} onChange={(e) => setGif(e.target.value)}/>
                             <button className='modal-search-button' onClick={() => {navigator.clipboard.writeText(gif)}}>Copy GIF URL </button>
 
-                            <input type='text' placeholder='Enter Owner (optional)' value={owner} onChange={(e) => setOwner(e.target.value)} />
+                            <input type='text' placeholder='Enter Owner (optional)' value={author} onChange={(e) => setAuthor(e.target.value)} />
                             <button className='modal-create-button' onClick={handleCreateCard}>Create Card</button>
                         </div>
 
