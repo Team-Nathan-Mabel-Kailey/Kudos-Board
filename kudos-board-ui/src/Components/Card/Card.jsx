@@ -54,9 +54,9 @@ const Card = ({ card, fetchCards, baseUrl}) => {
     };
 
     return (
-        <div className="card home-card">
-        <div className="card-content">
-            <h3>{title}</h3>
+        <div className=" card">
+        {/* <div className="card-content"> */}
+            <h3 className="card-title">{title}</h3>
             <p>{message}</p>
             <img src={gifUrl} alt="GIF" />
             <p>{author}</p>
@@ -85,7 +85,7 @@ const Card = ({ card, fetchCards, baseUrl}) => {
             </div>
             </div>
         </div>
-        </div>
+        // </div>
     );
 };
 

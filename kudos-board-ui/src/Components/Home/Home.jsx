@@ -40,7 +40,7 @@ const Home = () => {
 
   const displayBoards = () => {
     return filteredBoards.map((board) => (
-      <div key={board.board_id} className="board-card card">
+      <div key={board.board_id} className="home-card card">
         <img
           src={`https://picsum.photos/200/300?random=${board.board_id}`}
           alt={board.title}
