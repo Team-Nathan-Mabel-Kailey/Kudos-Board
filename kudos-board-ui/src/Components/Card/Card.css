@@ -28,16 +28,6 @@
     transform: translateY(-10px);
 }
 
-
-.card-buttons {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    padding: 10px 20px;
-    
-}
-
 .delete-button {
     color: #fff;
     background-color: #5D3FD3 ;
@@ -108,11 +98,13 @@
 }
 
 .add-comment {
+    
     display: flex;
     margin-top: 10px;
-    }
+}
 
 .add-comment input {
+    font-family: 'Work Sans', sans-serif;
     flex: 1;
     padding: 10px;
     border: 1px solid #ccc;
@@ -121,6 +113,9 @@
 
 .add-comment button {
     background: #5D3FD3;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 12px;
+    background: #4CAF50;
     color: white;
     border: none;
     padding: 10px 15px;
@@ -136,8 +131,6 @@
 .card-title p {
     font-weight: bold;
 }
-
-
 
 
 /* Board Card */
@@ -164,11 +157,12 @@
 
 /* Upvote button styling */
 .upvote-button {
+    font-family: 'Work Sans', sans-serif;
     background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 5px;
-    padding: 1.5vh;
+    padding: 1.1vh;
 }
 
 .upvote-button:hover {
@@ -177,11 +171,12 @@
 
 /* Delete button styling */
 .delete-button {
+    font-family: 'Work Sans', sans-serif;
     background-color: #f44336;
     color: white;
     border: none;
     border-radius: 5px;
-    padding: 1.5vh;
+    padding: 1.1vh;
 }
 
 .delete-button:hover {

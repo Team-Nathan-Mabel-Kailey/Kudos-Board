@@ -11,6 +11,17 @@
     align-items: center;
 }
 
+.home-card h3 {
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.home-card p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
 .board-card img {
     width: 100%;
     object-fit: cover;
@@ -93,6 +104,7 @@ main.search {
 }
 
 main.search input[type="text"] {
+    font-family: 'Work Sans', sans-serif;
     width: 100%;
     padding: 10px;
     border: 2px solid #ccc;
@@ -117,6 +129,8 @@ main.search input[type="text"]:focus {
 }
 
 .category-buttons .category-button {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 17px;
     background-color: #333;
     color: #fff;
     border: none;
@@ -136,4 +150,14 @@ main.search input[type="text"]:focus {
     justify-content: center;
 }
 
+button.create-btn {
+    font-family: 'Work Sans', sans-serif;
+}
 
+.card-buttons .view-board {
+    font-family: 'Work Sans', sans-serif;
+}
+
+.card-buttons .delete-board {
+    font-family: 'Work Sans', sans-serif;
+}

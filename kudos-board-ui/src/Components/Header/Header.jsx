@@ -10,7 +10,6 @@ const Header = () => {
             </Link>
                 <h1>KUDOBOARD</h1>
             </div>
-            
         </div>
     )
 }
