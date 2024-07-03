@@ -1,8 +1,7 @@
-// import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Card.css";
 import PropTypes from "prop-types";
 import axios from "axios";
-import { useState } from "react";
 
 const Card = ({ card, fetchCards, baseUrl }) => {
     const { title, message, gifUrl, author, card_id } = card;
@@ -10,10 +9,14 @@ const Card = ({ card, fetchCards, baseUrl }) => {
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
 
+    useEffect(() => {
+        fetchComments();
+    }, []);
+
     const handleUpvote = async () => {
         try {
-            const response = await axios.put(`http://localhost:3000/cards/${card_id}/upvote`, {
-                 upvotes: upvotes + 1 
+            const response = await axios.put(`${baseUrl}cards/${card_id}/upvote`, {
+                upvotes: upvotes + 1,
             });
             setUpvotes(response.data.upvotes);
         } catch (error) {
@@ -38,15 +41,15 @@ const Card = ({ card, fetchCards, baseUrl }) => {
             console.error("Error fetching comments:", error);
         }
     };
-        
+
     const handleAddComment = async () => {
         try {
             await axios.post(`${baseUrl}comments`, {
                 message: newComment,
-                author: "User", //Replace with actual user data
+                author: "User", // Replace with actual user data
                 cardId: card_id,
             });
-            setNewComment("");  //Reset data field
+            setNewComment(""); // Reset data field
             fetchComments();
         } catch (error) {
             console.error("Error adding comment:", error);
@@ -54,37 +57,36 @@ const Card = ({ card, fetchCards, baseUrl }) => {
     };
 
     return (
-        <div className=" card">
+        <div className="card">
             <h3 className="card-title">{title}</h3>
             <p>{message}</p>
             <img src={gifUrl} alt="GIF" />
             <p>{author}</p>
             <div className="board-card-buttons">
-            <button className="upvote-button" onClick={handleUpvote}>Upvote: {upvotes}</button>
-            <button className="delete-button" onClick={() => deleteCard(card.card_id)}>Delete</button>
+                <button className="upvote-button" onClick={handleUpvote}>Upvote: {upvotes}</button>
+                <button className="delete-button" onClick={() => deleteCard(card.card_id)}>Delete</button>
             </div>
             <div className="comments-section">
-            <h4>Comments</h4>
-            <ul>
-                {comments.map((comment) => (
-                <li key={comment.comment_id}>
-                    <p>{comment.message}</p>
-                    <small>by {comment.author}</small>
-                </li>
-                ))}
-            </ul>
-            <div className="add-comment">
-                <input
-                type="text"
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-                placeholder="Add a comment"
-                />
-                <button onClick={handleAddComment}>Add Comment</button>
-            </div>
+                <h4>Comments</h4>
+                <ul>
+                    {comments.map((comment) => (
+                        <li key={comment.comment_id}>
+                            <p>{comment.message}</p>
+                            <small>by {comment.author}</small>
+                        </li>
+                    ))}
+                </ul>
+                <div className="add-comment">
+                    <input
+                        type="text"
+                        value={newComment}
+                        onChange={(e) => setNewComment(e.target.value)}
+                        placeholder="Add a comment"
+                    />
+                    <button onClick={handleAddComment}>Add Comment</button>
+                </div>
             </div>
         </div>
-        // </div>
     );
 };
 
@@ -94,4 +96,4 @@ Card.propTypes = {
     card: PropTypes.object.isRequired,
     fetchCards: PropTypes.func.isRequired,
     baseUrl: PropTypes.string.isRequired
-}; 
+};
