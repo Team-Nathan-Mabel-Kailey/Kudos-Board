@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import "./Card.css";
 import "./BoardCard.css";
 import PropTypes from "prop-types";
