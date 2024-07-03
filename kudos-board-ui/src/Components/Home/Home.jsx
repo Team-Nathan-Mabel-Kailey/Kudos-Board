@@ -125,9 +125,9 @@ const Home = () => {
           <button className="button-common create-brd-btn" onClick={showModal}>
             Create a New Board
           </button>
-          {addNew && (
-            <BoardModal show={addNew}
-            onCreation={handleOnCreateBoard}
+          {addingNewBoard && (
+            <BoardModal show={addingNewBoard}
+            onCreation={createBoard}
             onClose={showModal}/>
           )}
         </div>
