@@ -6,17 +6,15 @@ import BoardModal from "../BoardModal/BoardModal"
 import Footer from '../Footer/Footer.jsx'
 import Header from '../Header/Header.jsx'
 
-
 // what is it: list of all boards
 const Home = () => {
   const [boards, setBoards] = useState([]);
-  const [addNew, setAddNew] = useState(false);
   const [filteredBoards, setFilteredBoards] = useState([]);
+  const [addingNewBoard, setAddingNewBoard] = useState(false);
   const [searchInputValue, setSearchInputValue] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
 
   const categories = ["All", "Recent", "Celebration", "Thank You", "Inspiration"];
-
   const baseUrl = "http://localhost:3000/";
 
   useEffect(() => {
@@ -28,148 +26,109 @@ const Home = () => {
       const response = await axios.get(baseUrl + "boards");
       setBoards(response.data);
       setFilteredBoards(response.data);
-      // console.log(response.data);
     } catch (error) {
-      console.error("Error displaying boards:", error);
+      console.error("Error getting boards:", error);
     }
   };
 
-  const showModal = () => {
-    setAddNew(!addNew);
+  const filterBoards = (searchTerm) => {
+    const filtered = boards.filter((board) =>
+      board.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredBoards(filtered);
   };
 
-  const handleOnCreateBoard = () => {
-    fetchBoards();
-    setAddNew(false);
-}
+  const displayBoards = () => {
+    return filteredBoards.map((board) => (
+      <div key={board.board_id} className="board-card card">
+        <img
+          src={`https://picsum.photos/200/300?random=${board.board_id}`}
+          alt={board.title}
+        />
+        <h3>{board.title}</h3>
+        <p>{board.category}</p>
+        <div className="card-buttons">
+          <Link to={`/boards/${board.board_id}`} className="button-common view-board">
+          View Board
+        </Link>
+          <button className="button-common delete-board" onClick={() => deleteBoard(board.board_id)}>
+            Delete Board
+          </button>
+        </div>
+      </div>
+    ));
+  };
 
+  const createBoard = () => {
+    fetchBoards();
+    setAddingNewBoard(false);
+  }
+  
   const deleteBoard = async (boardId) => {
-    try{
-      console.log("deleting board", boardId);
+    try {
       await axios.delete(baseUrl + `boards/${boardId}`);
       fetchBoards();
     } catch (error){
     console.error("Error deleting board:", error);
     }
   };
-  
-  /*const boardsByCategory =
-    activeCategory && activeCategory !== "All"
-      ? boards.filter((p) => p.category.toLowerCase() === activeCategory.toLowerCase())
-      : boards
 
-  console.log(activeCategory);
-  console.log(boards);
+  const showModal = () => {
+    setAddingNewBoard(!addingNewBoard);
+  };
 
-  const boardsToShow = searchInputValue
-    ? boardsByCategory.filter((p) => p.title.toLowerCase().indexOf(searchInputValue.toLowerCase()) !== -1)
-    : boardsByCategory*/
-
-    const displayBoards = () => {
-      return filteredBoards.map((board) => (
-        <div key={board.board_id} className="board-card card">
-          <img
-            src={`https://picsum.photos/200/300?random=${board.board_id}`}
-            alt={board.title}
-          />
-          <h3>{board.title}</h3>
-          <p>{board.category}</p>
-          <div className="card-buttons">
-            <Link to={`/boards/${board.board_id}`} className="button-common view-board">
-            View Board
-          </Link>
-            <button className="button-common delete-board" onClick={() => deleteBoard(board.board_id)}>
-              Delete Board
-            </button>
-          </div>
-        </div>
-      ));
-    };
-
-    const handleCategoryClick = (category) => {
-      setActiveCategory(category);
-      if (category === "All") {
-        setFilteredBoards(boards);
-      } else if (category === "Recent") {
-        const sortedByDate = [...boards].sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-        );
-        setFilteredBoards(sortedByDate);
-      } else {
-        const filtered = boards.filter((board) => board.category.toLowerCase() === category.toLowerCase());
-        setFilteredBoards(filtered);
-      }
-    };
-  
-    const handleSearchInputChange = (e) => {
-      setSearchInputValue(e.target.value);
-      filterBoards(e.target.value);
-    };
-  
-    const filterBoards = (searchTerm) => {
-      const filtered = boards.filter((board) =>
-        board.title.toLowerCase().includes(searchTerm.toLowerCase())
+  const handleCategoryClick = (category) => {
+    setActiveCategory(category);
+    
+    if (category === "All") {
+      setFilteredBoards(boards);
+    } else if (category === "Recent") {
+      const sortedByDate = [...boards].sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
+      setFilteredBoards(sortedByDate);
+    } else {
+      const filtered = boards.filter((board) => board.category.toLowerCase() === category.toLowerCase());
       setFilteredBoards(filtered);
-    };
+    }
+  };
+
+  const handleSearchInputChange = (e) => {
+    setSearchInputValue(e.target.value);
+    filterBoards(e.target.value);
+  };
 
   return (
     <div className="home">
       <Header />
-
       <main className="search">
         <input
           type="text"
-          placeholder="Search..."
+          placeholder="Search boards..."
           value={searchInputValue}
           onChange={handleSearchInputChange}
         />
       </main>
 
       <div className="category-buttons ">
-        {/* <button
-          className="button-common category-button"
-        >
-          All
-        </button>
-        <button
-          className="button-common category-button"
-        >
-          Recent
-        </button>
-        <button
-          className="button-common category-button"
-        >
-          Celebration
-        </button>
-        <button
-          className="button-common category-button"
-        >
-          Thank You
-        </button>
-        <button
-          className="button-common category-button"
-        >
-          Inspiration
-        </button> */}
-
-        {/* <ul className={`category-menu category-buttons`}> */}
-            {categories.map((cat) => (
-              <li className={activeCategory === cat ? "is-active" : ""} key={cat}>
-                <button className="button-common category-button" onClick={() => handleCategoryClick(cat)}>{cat}</button>
-              </li>
-            ))}
-          {/* </ul> */}
+        {categories.map((cat) => (
+          <li className={activeCategory === cat ? "is-active" : ""} key={cat}>
+            <button className="button-common category-button" onClick={() => handleCategoryClick(cat)}>{cat}</button>
+          </li>
+        ))}
       </div>
 
       <div className="button-container">
         <button className="button-common create-brd-btn" onClick={showModal}>
           Create a New Board
         </button>
-        {addNew && (
-          <BoardModal show={addNew}
-          onCreation={handleOnCreateBoard}
-          onClose={showModal}/>
+        
+        {addingNewBoard && (
+          <BoardModal
+            show={addingNewBoard}
+            onCreation={createBoard}
+            onClose={showModal}
+          />
         )}
       </div>
       
