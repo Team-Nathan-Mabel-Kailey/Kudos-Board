@@ -51,8 +51,8 @@ const BoardList = () => {
 
   return (
     <div>
-      <Link to="/">
-        <span className="return"></span>
+      <Link to="/" className="return">
+        <span> &lt; </span>
       </Link>
       <Header />
       <h2>{boardTitle}</h2>
