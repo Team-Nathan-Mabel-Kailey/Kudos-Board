@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const boardRoutes = require('./Routes/boardRoutes');
 const cardRoutes = require('./Routes/cardRoutes');
+const commentRoutes = require('./Routes/commentRoutes');
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(bodyParser.json());
 
 app.use('/boards', boardRoutes);
 app.use('/cards', cardRoutes);
+app.use('/comments', commentRoutes);
 
 const PORT = 3000;
 

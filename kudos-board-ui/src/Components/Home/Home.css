@@ -63,21 +63,22 @@
     margin-bottom: 30px;
 }
 
-header nav {
+.nav-bar {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 20px;
 }
 
-header nav a {
+.nav-bar a {
     color: #fff;
     text-decoration: none;
     padding: 10px 20px;
     transition: background-color 0.3s ease;
 }
 
-header nav a:hover {
+.nav-bar a:hover {
     background-color: #555;
     border-radius: 5px;
 }

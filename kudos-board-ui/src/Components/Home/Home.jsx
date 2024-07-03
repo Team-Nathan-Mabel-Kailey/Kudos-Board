@@ -79,7 +79,7 @@ const Home = () => {
 
   const handleCategoryClick = (category) => {
     setActiveCategory(category);
-    
+
     if (category === "All") {
       setFilteredBoards(boards);
     } else if (category === "Recent") {
@@ -101,35 +101,36 @@ const Home = () => {
   return (
     <div className="home">
       <Header />
-      <main className="search">
-        <input
-          type="text"
-          placeholder="Search boards..."
-          value={searchInputValue}
-          onChange={handleSearchInputChange}
-        />
-      </main>
-
-      <div className="category-buttons ">
-        {categories.map((cat) => (
-          <li className={activeCategory === cat ? "is-active" : ""} key={cat}>
-            <button className="button-common category-button" onClick={() => handleCategoryClick(cat)}>{cat}</button>
-          </li>
-        ))}
-      </div>
-
-      <div className="button-container">
-        <button className="button-common create-brd-btn" onClick={showModal}>
-          Create a New Board
-        </button>
-        
-        {addingNewBoard && (
-          <BoardModal
-            show={addingNewBoard}
-            onCreation={createBoard}
-            onClose={showModal}
+      <div className="nav-bar">
+        <main className="search">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchInputValue}
+            onChange={handleSearchInputChange}
           />
-        )}
+        </main>
+
+        <div className="category-buttons ">
+
+              {categories.map((cat) => (
+                <li className={activeCategory === cat ? "is-active" : ""} key={cat}>
+                  <button className="button-common category-button" onClick={() => handleCategoryClick(cat)}>{cat}</button>
+                </li>
+              ))}
+
+        </div>
+
+        <div className="button-container">
+          <button className="button-common create-brd-btn" onClick={showModal}>
+            Create a New Board
+          </button>
+          {addNew && (
+            <BoardModal show={addNew}
+            onCreation={handleOnCreateBoard}
+            onClose={showModal}/>
+          )}
+        </div>
       </div>
       
       <section className="board-list">{displayBoards()}</section>
