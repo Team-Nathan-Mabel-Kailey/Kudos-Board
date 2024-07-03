@@ -1,6 +1,5 @@
 // import React from "react";
 import "./Card.css";
-import "./BoardCard.css";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { useState } from "react";

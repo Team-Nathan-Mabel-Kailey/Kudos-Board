@@ -58,9 +58,5 @@ h2 {
     align-items: space-evenly;
     gap: 20px;
     padding: 20px 0;
-    margin-bottom: 100px;
-}
-
-.board-card h1{
-    font-weight: bold;
+    margin-bottom: 80px;
 }
