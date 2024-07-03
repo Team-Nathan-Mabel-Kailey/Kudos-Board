@@ -1,6 +1,5 @@
 // import React from "react";
 import "./Card.css";
-import "./BoardCard.css";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { useState } from "react";
@@ -13,20 +12,21 @@ const Card = ({ card, fetchCards, baseUrl }) => {
 
     const handleUpvote = async () => {
         try {
-            await axios.put(`http://localhost:3000/cards/${card_id}/upvote`, { upvotes: upvotes + 1 });
-            setUpvotes(upvotes + 1);
+            const response = await axios.put(`http://localhost:3000/cards/${card_id}/upvote`, {
+                 upvotes: upvotes + 1 
+            });
+            setUpvotes(response.data.upvotes);
         } catch (error) {
-            console.error("Error upvoting card:", error);
+            console.error("Error making upvote on card:", error);
         }
     };
 
     const deleteCard = async (cardId) => {
-        try{
-            console.log("deleting card", cardId);
+        try {
             await axios.delete(baseUrl + `cards/${cardId}`);
             fetchCards();
-        } catch (error){
-        console.error("Error deleting card:", error);
+        } catch (error) {
+            console.error("Error deleting card:", error);
         }
     };
 
@@ -42,11 +42,11 @@ const Card = ({ card, fetchCards, baseUrl }) => {
     const handleAddComment = async () => {
         try {
             await axios.post(`${baseUrl}comments`, {
-            message: newComment,
-            author: "User", // Replace with actual user data
-            cardId: card_id,
+                message: newComment,
+                author: "User", //Replace with actual user data
+                cardId: card_id,
             });
-            setNewComment("");
+            setNewComment("");  //Reset data field
             fetchComments();
         } catch (error) {
             console.error("Error adding comment:", error);
@@ -55,7 +55,6 @@ const Card = ({ card, fetchCards, baseUrl }) => {
 
     return (
         <div className=" card">
-        {/* <div className="card-content"> */}
             <h3 className="card-title">{title}</h3>
             <p>{message}</p>
             <img src={gifUrl} alt="GIF" />

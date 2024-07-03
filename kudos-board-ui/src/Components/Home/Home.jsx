@@ -38,27 +38,6 @@ const Home = () => {
     setFilteredBoards(filtered);
   };
 
-  const displayBoards = () => {
-    return filteredBoards.map((board) => (
-      <div key={board.board_id} className="home-card card">
-        <img
-          src={`https://picsum.photos/200/300?random=${board.board_id}`}
-          alt={board.title}
-        />
-        <h3>{board.title}</h3>
-        <p>{board.category}</p>
-        <div className="card-buttons">
-          <Link to={`/boards/${board.board_id}`} className="button-common view-board">
-          View Board
-        </Link>
-          <button className="button-common delete-board" onClick={() => deleteBoard(board.board_id)}>
-            Delete Board
-          </button>
-        </div>
-      </div>
-    ));
-  };
-
   const createBoard = () => {
     fetchBoards();
     setAddingNewBoard(false);
@@ -101,6 +80,7 @@ const Home = () => {
   return (
     <div className="home">
       <Header />
+
       <div className="nav-bar">
         <main className="search">
           <input
@@ -133,7 +113,28 @@ const Home = () => {
         </div>
       </div>
       
-      <section className="board-list">{displayBoards()}</section>
+      <section className="board-display">
+        {filteredBoards.map((board) => (
+          <div key={board.board_id} className="home-card card">
+            <img
+              src={`https://picsum.photos/200/300?random=${board.board_id}`}
+              alt={board.title}
+            />
+            <h3>{board.title}</h3>
+            <p>{board.category}</p>
+            <div className="card-buttons">
+              {/* Connection to boardList.jsx in App.jsx */}
+              <Link to={`/boards/${board.board_id}`} className="button-common view-board">
+                View Board
+              </Link> 
+              <button className="button-common delete-board" onClick={() => deleteBoard(board.board_id)}>
+                Delete Board
+              </button>
+            </div>
+          </div>
+        ))}
+      </section>
+
       <Footer />
     </div>
   );

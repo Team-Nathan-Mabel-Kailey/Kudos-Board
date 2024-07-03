@@ -8,7 +8,6 @@ import Header from '../Header/Header.jsx'
 import Card from "../Card/Card.jsx"
 import Modal from "../Modal/Modal.jsx"
 
-
 // what is it: list of cards inside each board
 const BoardList = () => {
   const { boardId } = useParams();
