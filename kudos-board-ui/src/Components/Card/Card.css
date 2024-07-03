@@ -30,7 +30,7 @@
 
 .delete-button {
     color: #fff;
-    background-color: #008080 ;
+    background-color: #5D3FD3 ;
 }
 
 .view-button {
@@ -112,6 +112,7 @@
 }
 
 .add-comment button {
+    background: #5D3FD3;
     font-family: 'Work Sans', sans-serif;
     font-size: 12px;
     background: #4CAF50;
