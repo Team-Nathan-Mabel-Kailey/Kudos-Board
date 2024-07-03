@@ -32,4 +32,14 @@ model Card {
   board_id  Int
   board     Board    @relation(fields: [board_id], references: [board_id], onDelete: Cascade)
   createdAt DateTime @default(now())
+  comments        Comment[]
+}
+
+model Comment {
+  comment_id      Int      @id @default(autoincrement())
+  message         String
+  author          String
+  createdAt       DateTime @default(now())
+  cardId          Int
+  card            Card     @relation(fields: [cardId], references: [card_id], onDelete: Cascade)
 }

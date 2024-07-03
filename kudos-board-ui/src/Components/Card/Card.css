@@ -47,3 +47,92 @@
     border: #1b1f2326 1px solid;
     text-decoration: underline;
 }
+
+.card-content {
+    padding: 20px;
+}
+
+.board-card-buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+}
+
+.upvote-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.upvote-button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+.delete-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.delete-button:hover {
+    background-color: #e53935;
+    transform: translateY(-2px);
+}
+
+.comments-section {
+    margin-top: 20px;
+}
+
+.comments-section h4 {
+    margin-bottom: 10px;
+}
+
+.comments-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.comments-section li {
+    background: #f9f9f9;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.add-comment {
+    display: flex;
+    margin-top: 10px;
+    }
+
+.add-comment input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.add-comment button {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-comment button:hover {
+    background: #45a049;
+}
