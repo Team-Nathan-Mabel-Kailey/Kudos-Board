@@ -1,10 +1,8 @@
 # Kudos-Board
 
-📝 `NOTE` Use this template to initialize the contents of a README.md file for your application. As you work on your assignment over the course of the week, update the required or stretch features lists to indicate which features you have completed by changing `[ ]` to `[x]`. (🚫 Remove this paragraph before submitting your assignment.)
-
 ## Unit Assignment: Kudos Board
 
-Submitted by: **NAME**
+Submitted by: **Mabel Inoa Mejia, Nathan Quiroa, and Kailey Chavez**
 
 Deployed Application (optional): [Kudos Board Deployed Site](ADD_LINK_HERE)
 
@@ -52,9 +50,14 @@ Deployed Application (optional): [Kudos Board Deployed Site](ADD_LINK_HERE)
 
 ### Walkthrough Video
 
-`TODO://` Add the embedded URL code to your animated app walkthrough below, `ADD_EMBEDDED_CODE_HERE`. Make sure the video or gif actually renders and animates when viewing this README. (🚫 Remove this paragraph after adding walkthrough video)
-
-`ADD_EMBEDDED_CODE_HERE`
+<div>
+    <a href="https://www.loom.com/share/092aa77a8f48464ca7e30698bc434502">
+      <p>Kudo Board - Group Unit 5 Project - Watch Video</p>
+    </a>
+    <a href="https://www.loom.com/share/092aa77a8f48464ca7e30698bc434502">
+      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/092aa77a8f48464ca7e30698bc434502-1720052468626-with-play.gif">
+    </a>
+  </div>
 
 ### Reflection
 
