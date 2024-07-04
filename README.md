@@ -67,7 +67,7 @@ The labs from Unit 3 and 4 provided a solid foundation in React, Express, and da
 
 * If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
   
-The demo went well in terms of showcasing the core functionalities like board and card creation, user registration, and login. The integration between the frontend and backend was smooth, and the real-time updates for comments worked as expected. Given more time, I would focus on enhancing the user experience by refining the UI/UX design and adding additional features like User Authentication. I would have also liked to organize some of the error handling more elegantly.
+The demo went well in terms of showcasing the core functionalities like board and card creation, user registration, and login. The integration between the frontend and backend was smooth, and the real-time updates for comments worked as expected. Given more time, we would focus on enhancing the user experience by refining the UI/UX design and adding additional features like User Authentication. We would have also liked to organize some of the error handling more elegantly.
 
 * Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
 
@@ -75,11 +75,10 @@ The demo went well in terms of showcasing the core functionalities like board an
 
 ### Open-source libraries used
 
-- n/a
+- No open-source libraries were used, but StackOverflow, MDN Web Docs, and Prisma documentation were used.
 
 ### Shout out
 
 Give a shout out to somebody from your cohort that especially helped you during your project. This can be a fellow peer, instructor, TA, mentor, etc.
 
-Shoutout to Erika!!
-
+Shoutout to our CodePath instructors, especially Erika, and our peers for their continued support and guidance!!
