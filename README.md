@@ -63,21 +63,23 @@ Deployed Application (optional): [Kudos Board Deployed Site](ADD_LINK_HERE)
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
-Add your response here
+The labs from Unit 3 and 4 provided a solid foundation in React, Express, and database management using Prisma. This groundwork was crucial for implementing key features such as board and card creation, fetching data from the backend, and updating the frontend dynamically. The step-by-step approach in the labs ensured a comprehensive understanding of CRUD operations and state management in React.
 
 * If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
   
-Add your response here
+The demo went well in terms of showcasing the core functionalities like board and card creation, user registration, and login. The integration between the frontend and backend was smooth, and the real-time updates for comments worked as expected. Given more time, I would focus on enhancing the user experience by refining the UI/UX design and adding additional features like User Authentication. I would have also liked to organize some of the error handling more elegantly.
 
 * Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
 
-Add your response here
+The demo went well in terms of showcasing the core functionalities like board and card creation and displaying comments. The integration between the frontend and backend was smooth, and the real-time updates for comments worked as expected. The Prisma integration for database management was also a positive experience, allowing for efficient data handling and queries. The project organization and use of version control facilitated effective collaboration and project management within the team.
 
 ### Open-source libraries used
 
-- Add any links to open-source libraries used in your project.
+- n/a
 
 ### Shout out
 
 Give a shout out to somebody from your cohort that especially helped you during your project. This can be a fellow peer, instructor, TA, mentor, etc.
+
+Shoutout to Erika!!
 
